@@ -11,6 +11,7 @@ Exit: spec approved and constraints captured.
 - Variant manager using git worktree add/list/remove.
 - Run executor for native commands with logs.
 - Basic context pack artifact (manual selection).
+ - Python-first core services and Textual TUI.
 Exit: user can create variants and run commands with auditable logs.
 
 ## Phase 2: Capability and context
@@ -37,3 +38,6 @@ Exit: safe integration of parallel work.
 - Parallel worker dispatch to variants.
 - UI dashboard for multi-run status.
 Exit: repeatable pipelines across agent tools.
+
+## Phase 6: Post-validation hardening (optional)
+- Consider Go rewrite of daemon/sidecar if performance or packaging demands it.

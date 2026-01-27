@@ -10,6 +10,7 @@
 - Security: storing logs and context packs may leak secrets.
 - Sidecar complexity: PTY streaming and tool compatibility.
 - Editor integration drift: VS Code/Cursor APIs can change.
+- Python performance or packaging limitations at scale.
 
 ## Mitigations
 - Adapter versioning and compatibility matrix per tool.

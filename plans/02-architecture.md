@@ -12,6 +12,11 @@
 - Merge planner: builds patch bundles and merge plans.
 - UI (optional early): dashboard for variants, context, and runs.
 
+## MVP implementation choices
+- Python 3.12+ for daemon, TUI, and sidecar.
+- Textual for TUI; Typer for CLI.
+- VS Code/Cursor extension in TypeScript.
+
 ## Proposed local file layout (working names)
 ## Storage and configuration layout
 

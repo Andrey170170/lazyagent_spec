@@ -36,6 +36,7 @@ Provide a unified, local-first workspace layer that turns agentic coding into a 
 - "Max" vision: all planes (variant, runtime, capability, context, merge, workflow).
 - MVP path: start with variants, context packs, and patch bundles, then layer isolation.
 - First-class tool adapters in MVP: OpenCode and Cursor (add others later).
+- MVP implementation: Python-first (Textual TUI), with possible Go rewrite later.
 
 ## Document map
 - plans/01-requirements.md
