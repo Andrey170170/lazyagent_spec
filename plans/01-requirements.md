@@ -13,6 +13,11 @@
 
 ## Functional requirements
 
+### Project onboarding
+- TUI-first flow to register or clone projects.
+- Optional Git URL input to clone into a managed projects root.
+- Initialize workspace metadata automatically after clone.
+
 ### Variants (project state plane)
 - Create, switch, list, archive, and delete variants quickly.
 - Variant metadata: owner/agent, base commit, purpose, timestamps.
@@ -24,6 +29,7 @@
 - Support devcontainer or Docker Compose profiles.
 - Enforce resource limits and network restrictions when configured.
 - Capture command history, stdout/stderr, and artifacts per run.
+- Sidecar bridge in container for PTY streaming and session status.
 
 ### Capabilities (capability plane)
 - Canonical registry of skills, prompts, hooks, and policies.
@@ -48,6 +54,13 @@
 - Declarative workflow steps: planner, worker, reviewer, tester.
 - Run steps in parallel with isolated variants.
 - Persist artifacts per step: patch bundle, context pack, run logs.
+
+### UX and sessions
+- TUI provides fork flow with naming prompt and spinner during setup.
+- Sidebar shows running variants with status, build logs, and warnings.
+- Initialization uses sidebar spinner without blocking main view.
+- Quick session switching between variants.
+- VS Code/Cursor extension integration for container attach.
 
 ## Non-functional requirements
 - Local-first: all core features work offline.

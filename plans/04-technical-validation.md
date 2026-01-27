@@ -53,5 +53,7 @@ Implication:
 
 ## Gaps and follow-ups
 - Verify Cursor and Claude Code config formats for adapters.
+- Validate programmatic devcontainer lifecycle (devcontainer CLI or equivalent).
+- Confirm Cursor/VS Code devcontainer support for extension attach.
 - Confirm compatibility across git versions (worktree config extensions).
 - Confirm podman support if Docker is not available.

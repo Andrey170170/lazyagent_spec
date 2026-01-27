@@ -8,6 +8,8 @@
 - Trust: users may hesitate to let automation apply patches.
 - Agentic merge correctness: plan quality and conflict handling.
 - Security: storing logs and context packs may leak secrets.
+- Sidecar complexity: PTY streaming and tool compatibility.
+- Editor integration drift: VS Code/Cursor APIs can change.
 
 ## Mitigations
 - Adapter versioning and compatibility matrix per tool.

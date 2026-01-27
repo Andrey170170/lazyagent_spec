@@ -6,12 +6,26 @@
 3. Create default role profile and env profile.
 4. Register baseline facts (project purpose, constraints).
 
+## Project onboarding (TUI)
+1. Select "Add project" and enter a Git URL or local path.
+2. Clone into managed projects root (if URL).
+3. Run workspace init and detect tooling.
+4. Show project in sidebar with status.
+
 ## Variant lifecycle
 - Create: new variant from base ref (main or specific commit).
 - Attach role and env profile.
 - Work: run agent tasks and capture context packs.
 - Archive: freeze variant metadata and store final patch bundle.
 - Remove: clean worktree and metadata if safe.
+
+## Fork and connect flow (container)
+1. Trigger Fork in TUI and provide variant name.
+2. Create worktree and attach env profile.
+3. Start container with bind-mounted worktree.
+4. Launch sidecar bridge in container.
+5. Attach to tool session via PTY stream.
+6. Sidebar shows a spinner while build runs without blocking main view.
 
 ## Example CLI flow (placeholder names)
 ```
@@ -35,6 +49,11 @@ agentctl merge plan --bundle <bundle-id>
 3. Run each task in isolated env profile.
 4. Collect patch bundles and test results.
 5. Build merge plan and integrate in order.
+
+## Session switching
+1. Sidebar lists active variants with status indicators.
+2. Select a variant to attach its tool session.
+3. Background sessions continue running with status updates.
 
 ## Merge and verification flow
 1. Generate agentic merge plan with stated steps.

@@ -23,6 +23,8 @@ Provide a unified, local-first workspace layer that turns agentic coding into a 
 - Isolation by default for parallel runs; safe merging with verification gates.
 - Tool-agnostic core with adapters for popular agent tools.
 - Minimal cognitive load: a single dashboard of variants, runs, and context.
+- TUI-first UX with fast keyboard-driven workflows.
+- Sidecar bridge for tool integration and container session status.
 
 ## Glossary
 - Variant: a first-class workspace instance, usually backed by a git worktree.
