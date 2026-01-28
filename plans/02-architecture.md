@@ -94,6 +94,11 @@
 - Exposes status endpoints (git status, diff count, run state, todos).
 - Coordinates skill/config mounts with safe updates.
 
+## Port management
+- MVP: allocate ports at startup; record logical->actual mappings per variant.
+- Inject PORT/BASE_URL env vars before process start.
+- Future: host-side proxy for dynamic remapping without restarts.
+
 ## Context manager design
 - Context pack pipeline: select -> rank -> review -> lock.
 - Store provenance: file path, line ranges, reason, timestamp.

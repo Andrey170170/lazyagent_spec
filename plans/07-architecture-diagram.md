@@ -15,6 +15,7 @@ flowchart LR
     CapabilityMgr[Capability Manager]
     RunExec[Run Executor]
     MergePlan[Agentic Merge Planner]
+    PortMgr[Port Manager]
   end
 
   subgraph Storage[Local Storage]
@@ -51,6 +52,7 @@ flowchart LR
   UI --> CapabilityMgr
   UI --> VariantMgr
   UI --> SessionMgr
+  UI --> PortMgr
 
   Daemon --> Registry
   Daemon --> VariantMgr
@@ -59,6 +61,7 @@ flowchart LR
   Daemon --> CapabilityMgr
   Daemon --> RunExec
   Daemon --> MergePlan
+  Daemon --> PortMgr
 
   Registry --> MetaStore
   ContextMgr --> ContextStore
@@ -72,6 +75,8 @@ flowchart LR
   RunExec --> Native
   RunExec --> Container
   RunExec --> Compose
+
+  PortMgr --> RunExec
 
   SessionMgr --> Sidecar
   Sidecar <--> ToolPTY

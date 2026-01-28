@@ -31,8 +31,9 @@
 2. Create worktree and attach env profile.
 3. Start container with bind-mounted worktree.
 4. Launch sidecar bridge in container.
-5. Attach to tool session via PTY stream.
-6. Sidebar shows a spinner while build runs without blocking main view.
+5. Allocate ports for the variant; set PORT/BASE_URL env vars.
+6. Attach to tool session via PTY stream.
+7. Sidebar shows a spinner while build runs without blocking main view.
 
 ## Environment drift and promotion
 1. Sidecar detects package installs (apt/pip/npm).

@@ -44,3 +44,4 @@
 - Permissions model (commands, paths, network).
 - Storage retention/cleanup policies.
 - Platform support and distribution strategy.
+- Port management details (allocation policy, UI mapping, future proxy).

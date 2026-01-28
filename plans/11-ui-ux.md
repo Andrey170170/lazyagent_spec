@@ -86,6 +86,11 @@
 - Drift summary: detected changes with promote/discard actions.
 - Build history and last image digest.
 
+### Ports view
+- Logical to actual port mappings per variant.
+- Copy-to-clipboard URLs.
+- Quick switch for side-by-side comparisons (future proxy remap).
+
 ### Merge plan view
 - Ordered list of patch bundles.
 - Env spec merge summary (added/removed packages, file overrides).
