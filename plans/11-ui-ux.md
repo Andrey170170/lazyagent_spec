@@ -1,5 +1,13 @@
 # UI/UX design doc (TUI-first)
 
+## Mock
+
+![main project page mockup](../images/main_page.png)
+
+![pty session mockup](../images/pty_session.png)
+
+[figma make mockup](https://www.figma.com/make/EeKVsngadEeoWTRRdP5CRB/TUI-Project-Management-App?t=t56ebnKEv8vVGpIe-1)
+
 ## Goals
 - Fast, keyboard-driven workflow for managing projects and variants.
 - Keep main screen responsive; long tasks show in sidebar spinner.
