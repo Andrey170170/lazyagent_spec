@@ -23,6 +23,7 @@ Located at `<repo>/.agentplane/` and git-ignored by default.
 - `skills/`: project-specific skill overrides and prompts.
 - `profiles/`: project-specific role profiles.
 - `env/`: environment spec and journal (see below).
+- `memory/`: decisions, assumptions, invariants, candidates.
 - `variants/`: per-variant metadata and status.
 - `context/`: context packs and fact store.
 - `runs/`: stdout/stderr logs, test reports, artifacts.
@@ -56,6 +57,14 @@ Located at `.agentplane/env/`.
 - `spec.json`: canonical environment spec (base image + features + packages).
 - `journal.jsonl`: append-only log of runtime installs detected by sidecar.
 - `overlays/`: per-variant env overlays (optional).
+
+## Memory store
+Located at `.agentplane/memory/`.
+
+- `decisions.md`: durable product/tech decisions.
+- `assumptions.md`: assumptions pending validation.
+- `invariants.md`: rules that should not be violated.
+- `candidates.md`: pending memory suggestions.
 
 ## Example file: `.agentplane/workspace.json`
 ```json

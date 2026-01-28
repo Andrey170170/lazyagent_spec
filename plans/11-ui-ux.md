@@ -55,6 +55,7 @@
 ### Project list
 - List registered projects with last-opened timestamp.
 - Quick actions: open, fork, settings, remove.
+- Search: fuzzy project search with filters.
 
 ### Project overview
 - Summary: default role, env profile, active variants, last run.
@@ -63,6 +64,7 @@
 ### Variant list
 - Table of variants with status, base ref, role, env, last run.
 - Actions: open session, archive, delete, build env.
+- Search: fuzzy variant search with filters (status, role, env).
 
 ### Session view (embedded PTY)
 - Full-height PTY pane for OpenCode/Cursor CLI.
@@ -72,6 +74,12 @@
 ### Context pack inspector
 - List of items with provenance (path, reason, size).
 - Actions: pin, exclude, reorder, rebuild pack.
+
+### Memory view
+- Tabs: Decisions, Assumptions, Invariants, Candidates.
+- Candidate approval with one-click promote.
+- Conflict indicator when new entries collide with existing decisions.
+- Restart prompt after promotion (with auto-restart toggle).
 
 ### Environment view
 - Env spec summary: base image, features, packages.
@@ -105,6 +113,12 @@
 3. Regenerate spec + rebuild image in background.
 4. Sidebar shows [BUILD] spinner; state updates on completion.
 
+### Approve memories
+1. Badge indicates new candidates.
+2. Open Memory view and review candidates.
+3. Approve/reject; conflicts must be resolved.
+4. Prompt to restart sessions to apply updates.
+
 ## Keyboard shortcuts (initial set)
 - `p`: project switcher.
 - `v`: variant list.
@@ -134,3 +148,4 @@
 - TUI-only with embedded PTY and sidebar status.
 - Project list, variant list, session view, env view.
 - Merge plan view is read-only first, apply later.
+- Memory view with candidate approval.

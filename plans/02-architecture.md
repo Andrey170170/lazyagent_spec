@@ -8,6 +8,7 @@
 - Run executor: executes commands in isolated environments.
 - Session manager: handles tool sessions and PTY streams.
 - Context manager: builds and stores context packs and facts.
+- Memory manager: maintains decisions/assumptions and candidate memories.
 - Capability manager: stores skills/prompts and exports to tools.
 - Merge planner: builds patch bundles and merge plans.
 - UI (optional early): dashboard for variants, context, and runs.
@@ -34,6 +35,7 @@
   - `profiles/`: project-specific role profiles.
   - `variants/`: per-variant metadata (base ref, env, role, timestamps).
   - `context/`: context packs and fact store.
+  - `memory/`: decisions, assumptions, invariants, candidates.
   - `runs/`: stdout/stderr logs and artifacts.
 
 ### Generated tool configs (per-variant worktree root)
@@ -51,6 +53,10 @@
 - On startup, the daemon reads `registry.json` and reconciles projects.
 - Worktrees/containers are reattached when possible; stale entries are flagged.
 - Sidebar session state is restored from the last known run.
+
+## Tool memory injection
+- Adapters always point tools to the canonical memory files.
+- After memory promotion, prompt user to restart sessions.
 
 ## Data model (minimal)
 - Workspace: name, root path, default role, default env, created_at.

@@ -68,6 +68,13 @@ agentctl merge plan --bundle <bundle-id>
 2. Select a variant to attach its tool session.
 3. Background sessions continue running with status updates.
 
+## Memory formation flow
+1. Run produces a summary.
+2. System generates candidate memories with provenance.
+3. User approves or rejects candidates.
+4. Approved memories are promoted to durable files.
+5. Prompt to restart sessions to apply updates (optional auto-restart).
+
 ## Merge and verification flow
 1. Generate agentic merge plan with stated steps.
 2. Verify base ref matches expected.

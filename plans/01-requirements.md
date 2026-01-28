@@ -43,6 +43,7 @@
 - Allow user review, pin, exclude, and budget allocation controls.
 - Store long-term project facts and decisions in a versioned store.
 - Link each run to its exact context pack.
+- Generate candidate memories and require approval before promotion.
 
 ### Integration and merging (merge plane)
 - Agentic merge assistance with stated, deterministic merge plans.
