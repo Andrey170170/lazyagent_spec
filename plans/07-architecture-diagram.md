@@ -3,92 +3,52 @@
 ```mermaid
 flowchart LR
   User([User]) --> UI[TUI/CLI]
-  User --> Extension[VS Code/Cursor Extension]
-  UI --> Daemon[Local Orchestrator/Daemon]
-  Extension --> Daemon
+  UI --> Daemon[Local Orchestrator]
 
   subgraph Core[Core Services]
-    Registry[(Workspace Registry)]
-    VariantMgr[Variant Manager]
-    SessionMgr[Session Manager]
-    ContextMgr[Context Manager]
-    CapabilityMgr[Capability Manager]
-    RunExec[Run Executor]
-    MergePlan[Agentic Merge Planner]
-    PortMgr[Port Manager]
+    VariantMgr[Variants]
+    RunExec[Runs]
+    SessionMgr[Sessions]
+    ContextMgr[Context Packs]
+    MemoryMgr[Memory]
+    CapabilityMgr[Capabilities]
+    MergePlan[Merge Plans]
+    PortMgr[Ports]
   end
 
   subgraph Storage[Local Storage]
-    MetaStore[(.agentplane metadata)]
-    RunLogs[(Run logs & artifacts)]
-    ContextStore[(Context packs & facts)]
-    SkillStore[(Skills & profiles)]
+    Store[(.agentplane)]
   end
 
-  subgraph Git[Git Layer]
-    Worktrees[git worktrees]
-    PatchBundles[Patch bundles]
+  subgraph Git[Git]
+    Worktrees[Worktrees]
+    Patches[Patch Bundles]
   end
 
-  subgraph Envs[Runtime Environments]
+  subgraph Envs[Environments]
     Native[Native]
-    subgraph Container[Containerized Variant]
-      Sidecar[Sidecar Bridge]
-      ToolPTY[Tool Session]
-      ToolLabel[OpenCode or Cursor CLI]
-    end
-    Compose[Docker Compose]
+    Container[Container + Sidecar]
   end
 
-  subgraph Adapters[Tool Adapters]
-    OpenCode[OpenCode adapter]
-    Cursor[Cursor adapter]
+  subgraph Tools[Agent Tools]
+    Tool[OpenCode/Cursor CLI]
   end
 
-  UI --> Registry
-  UI --> ContextMgr
-  UI --> MergePlan
-  UI --> RunExec
-  UI --> CapabilityMgr
-  UI --> VariantMgr
-  UI --> SessionMgr
-  UI --> PortMgr
-
-  Daemon --> Registry
-  Daemon --> VariantMgr
-  Daemon --> SessionMgr
-  Daemon --> ContextMgr
-  Daemon --> CapabilityMgr
-  Daemon --> RunExec
-  Daemon --> MergePlan
-  Daemon --> PortMgr
-
-  Registry --> MetaStore
-  ContextMgr --> ContextStore
-  CapabilityMgr --> SkillStore
-  RunExec --> RunLogs
-
+  Daemon --> Core
+  Core --> Store
   VariantMgr --> Worktrees
-  MergePlan --> PatchBundles
-  PatchBundles --> Worktrees
-
-  RunExec --> Native
-  RunExec --> Container
-  RunExec --> Compose
-
+  MergePlan --> Patches
+  Patches --> Worktrees
+  RunExec --> Envs
+  SessionMgr --> Container
+  Container --> Tool
   PortMgr --> RunExec
-
-  SessionMgr --> Sidecar
-  Sidecar <--> ToolPTY
-  ToolPTY --> ToolLabel
-
-  CapabilityMgr --> OpenCode
-  CapabilityMgr --> Cursor
-  OpenCode --> Worktrees
-  Cursor --> Worktrees
+  CapabilityMgr --> Worktrees
+  ContextMgr --> Tool
+  MemoryMgr --> Tool
 ```
 
 Notes
-- The daemon can be optional for early MVP; CLI can call services directly.
+- The daemon is the primary source of truth; TUI/CLI connect as clients.
 - Adapters export into tool-specific configs in the repo (opencode.json, .cursor/rules).
 - Context packs and merge plans are first-class artifacts stored locally.

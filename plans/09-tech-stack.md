@@ -15,6 +15,7 @@ MVP is Python-first to maximize team speed and iteration. Rewrites to Go can hap
 - TUI: Textual (Python) with embedded PTY support for tool sessions.
 - CLI: Typer (Python) for a thin command surface that calls the daemon.
 - Sidecar bridge: Python process inside containers for PTY streaming + status.
+ - Daemon runs continuously; TUI/CLI attach from any directory.
 
 ## Python libraries (planned)
 - Async runtime: `asyncio` (stdlib).

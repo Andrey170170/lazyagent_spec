@@ -2,6 +2,7 @@
 
 ## High-level components
 - CLI and daemon (local): orchestrates variants, runs, and adapters.
+- Daemon is the primary source of truth; TUI/CLI are clients.
 - Workspace registry: stores metadata for variants, roles, env profiles.
 - Project manager: clones and registers repos in managed root.
 - Variant manager: wraps git worktrees and branch lifecycle.
