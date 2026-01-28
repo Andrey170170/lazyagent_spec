@@ -32,3 +32,15 @@
 - Long-term fact store format: JSONL, Markdown, or SQLite?
 - Merge bundle format: raw patches, commits, or both?
 - How to capture context budget consistently across providers.
+
+## What's left to discuss
+- Daemon + sidecar API protocol (endpoints, auth, reconnects).
+- Data schemas for workspace/variants/runs/specs.
+- Adapter mapping details for OpenCode/Cursor.
+- Context pack selection and scoring rules.
+- Agentic merge plan generation logic and failure modes.
+- Environment build pipeline and caching strategy.
+- VS Code/Cursor extension spec and attach flow.
+- Permissions model (commands, paths, network).
+- Storage retention/cleanup policies.
+- Platform support and distribution strategy.
