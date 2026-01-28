@@ -33,7 +33,8 @@ flowchart LR
     Native[Native]
     subgraph Container[Containerized Variant]
       Sidecar[Sidecar Bridge]
-      ToolPTY[Tool Session (OpenCode/Cursor CLI)]
+      ToolPTY[Tool Session]
+      ToolLabel[OpenCode or Cursor CLI]
     end
     Compose[Docker Compose]
   end
@@ -74,6 +75,7 @@ flowchart LR
 
   SessionMgr --> Sidecar
   Sidecar <--> ToolPTY
+  ToolPTY --> ToolLabel
 
   CapabilityMgr --> OpenCode
   CapabilityMgr --> Cursor

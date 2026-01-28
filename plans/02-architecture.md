@@ -75,6 +75,13 @@
 - Resource limits: use container runtime flags where available.
 - Bind-mount worktrees into containers for fast variant startup.
 
+## Environment templates and specs
+- Template store provides reusable base images and feature sets.
+- Environment spec captures the reproducible setup for a project.
+- Variants can apply temporary overlays without mutating the base spec.
+- Sidecar records runtime installs and can promote them into the spec.
+- Drift signals: package manager shims, docker diff, targeted file watches.
+
 ## Sidecar bridge (container)
 - Lightweight agent gateway running inside each container.
 - Exposes PTY stream for interactive tool UIs.

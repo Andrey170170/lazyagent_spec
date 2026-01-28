@@ -12,6 +12,13 @@
 3. Run workspace init and detect tooling.
 4. Show project in sidebar with status.
 
+## Environment initialization
+1. Detect project type (pyproject.toml, package.json, etc.).
+2. Suggest a template (Python, Node, Rust, etc.).
+3. User selects template and optional features.
+4. Generate environment spec + devcontainer config.
+5. Build the image in background; show sidebar spinner.
+
 ## Variant lifecycle
 - Create: new variant from base ref (main or specific commit).
 - Attach role and env profile.
@@ -26,6 +33,12 @@
 4. Launch sidecar bridge in container.
 5. Attach to tool session via PTY stream.
 6. Sidebar shows a spinner while build runs without blocking main view.
+
+## Environment drift and promotion
+1. Sidecar detects package installs (apt/pip/npm).
+2. Record changes in an env journal.
+3. Prompt to promote changes into env spec or keep as variant overlay.
+4. If promoted, regenerate Dockerfile/devcontainer config and rebuild.
 
 ## Example CLI flow (placeholder names)
 ```
@@ -58,10 +71,11 @@ agentctl merge plan --bundle <bundle-id>
 ## Merge and verification flow
 1. Generate agentic merge plan with stated steps.
 2. Verify base ref matches expected.
-3. Apply patch bundles in deterministic order.
-4. Run verification gates (lint, test, build).
-5. Require human approval for conflicts or failures.
-6. Mark variants as merged and archive.
+3. Reconcile environment specs and overlays.
+4. Apply patch bundles in deterministic order.
+5. Run verification gates (lint, test, build).
+6. Require human approval for conflicts or failures.
+7. Mark variants as merged and archive.
 
 ## UX expectations (dashboard)
 - Variants list with status, diff summary, and last run.

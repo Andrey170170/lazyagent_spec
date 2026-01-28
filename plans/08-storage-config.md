@@ -22,6 +22,7 @@ Located at `<repo>/.agentplane/` and git-ignored by default.
 - `workspace.json`: project metadata, default role/env, adapter settings.
 - `skills/`: project-specific skill overrides and prompts.
 - `profiles/`: project-specific role profiles.
+- `env/`: environment spec and journal (see below).
 - `variants/`: per-variant metadata and status.
 - `context/`: context packs and fact store.
 - `runs/`: stdout/stderr logs, test reports, artifacts.
@@ -48,6 +49,13 @@ Stored in the variant worktree root and regenerated as needed.
 - Default: skills/configs are read-only inside containers (bind-mounted).
 - If enabled: sidecar requests updates via daemon; daemon applies edits on host.
 - During updates, tool sessions are paused or locked to avoid partial writes.
+
+## Environment specs
+Located at `.agentplane/env/`.
+
+- `spec.json`: canonical environment spec (base image + features + packages).
+- `journal.jsonl`: append-only log of runtime installs detected by sidecar.
+- `overlays/`: per-variant env overlays (optional).
 
 ## Example file: `.agentplane/workspace.json`
 ```json
