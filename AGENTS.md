@@ -93,6 +93,7 @@
 - Keep docstrings concise; document public functions and modules.
 - Prefer usage examples over exhaustive API descriptions.
 - If you add a CLI flag or environment variable, document it here and in `README.md`.
+- Keep `plans/` docs in sync with decisions and changes; update summary sections when needed.
 
 ## Configuration and I/O
 - Keep configuration explicit; prefer function parameters or argparse flags.

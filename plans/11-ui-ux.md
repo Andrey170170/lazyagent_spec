@@ -96,6 +96,7 @@
 - Env spec merge summary (added/removed packages, file overrides).
 - Run gates: lint/test/build status.
 - Final action: apply merge or abort.
+- Optional pattern selection for idea-level merges.
 
 ## Key flows
 

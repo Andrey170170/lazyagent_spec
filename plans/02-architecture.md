@@ -121,6 +121,7 @@
 - Apply via git apply or git am, with metadata checks.
 - Verification gates: lint/test/status before merge.
 - Optional 3-way conflict helper, but human-approved.
+- Supports intent-slice and pattern merge modes.
 
 ## APIs and surfaces
 - CLI commands: init, variant create, run, context inspect, merge plan.

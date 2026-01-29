@@ -85,6 +85,12 @@ agentctl merge plan --bundle <bundle-id>
 6. Require human approval for conflicts or failures.
 7. Mark variants as merged and archive.
 
+## Post-merge refactor (optional)
+1. Create a refactor variant from the merged integration state.
+2. Apply pattern merge or targeted cleanup.
+3. Run gates; if green, merge refactor patch.
+4. If failed, discard without blocking the merge.
+
 ## UX expectations (dashboard)
 - Variants list with status, diff summary, and last run.
 - Context pack inspector with provenance and budget breakdown.

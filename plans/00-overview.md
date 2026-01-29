@@ -8,6 +8,14 @@ It standardizes workspaces, environments, capability sets, context packs, and me
 - Preliminary summary from past chat: https://chatgpt.com/c/69753cf8-4a14-8332-9432-240da68ff6eb
 - Repo intent: spec sheets and feasibility planning for a startup idea.
 
+## Current summary
+- Spec-first repository; primary output lives under `plans/`.
+- Python-first MVP with Textual TUI, FastAPI daemon, Typer CLI, sidecar bridge.
+- Daemon is the primary source of truth; clients attach from any directory.
+- Canonical env spec in `.agentplane/env/spec.json`; devcontainer configs generated.
+- Memory uses Markdown with frontmatter; candidates require approval.
+- Port allocation at startup; dynamic remap via proxy is future work.
+
 ## Problem statement (condensed)
 - Capability sprawl: each tool has its own config and skill folders.
 - Opaque context: users cannot see or control what an agent actually used.
@@ -45,3 +53,11 @@ Provide a unified, local-first workspace layer that turns agentic coding into a 
 - plans/04-technical-validation.md
 - plans/05-roadmap.md
 - plans/06-risks-questions.md
+- plans/07-architecture-diagram.md
+- plans/08-storage-config.md
+- plans/09-tech-stack.md
+- plans/10-environments.md
+- plans/11-ui-ux.md
+- plans/12-capabilities-management.md
+- plans/13-memory.md
+- plans/14-merging.md
