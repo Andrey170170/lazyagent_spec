@@ -3,35 +3,56 @@
 This roadmap prioritizes early end-to-end validation and fast iteration.
 Each phase yields a working slice that can be tested with real agents.
 
+## Integration strategy alignment
+
+The roadmap follows the 4-layer integration strategy:
+
+```
+Phase 0-1: Layer 1 (CLI + TUI Foundation) - core platform
+Phase 1-2: Layer 2 (Config/Skill Export) - OpenCode, Cursor, etc.
+Phase 2-3: Layer 3 (OpenCode Deep) - OSS collaboration
+Phase 3+:  Layer 4 (Protocol) - document patterns as specs
+```
+
+See `plans/16-integration-strategy.md` for layer details.
+
 ## Workstreams (team of 4)
 - Core/Daemon: registry, variants, run executor, APIs.
 - TUI/UX: navigation, session views, status, search.
 - Env/Sidecar: containers, env spec, drift detection, port mapping.
 - Merge/Agentic: patch bundles, merge plans, refactor modes.
 
-## Phase 0: Scaffolding and vertical slice
-Focus: run real workflows quickly.
+## Phase 0: Scaffolding and vertical slice (Layer 1)
+Focus: CLI + TUI foundation that works with ANY agent tool.
 
 Deliverables:
-- Daemon skeleton with project registry and variant create/list.
+- CLI commands: `lazyagent init`, `lazyagent fork`, `lazyagent list`.
 - TUI skeleton (project list, variant list, status area).
-- Native run executor with logs.
-- Minimal memory store (facts/decisions files).
-- Patch bundle export (diff-based) and apply on integration variant.
+- Variant manager wrapping git worktrees.
+- Native run executor: `lazyagent run <any-command>` with logs.
+- Basic context snapshot on fork (tracked files, git state).
+- Patch bundle export (diff-based) and apply.
+- Daemon skeleton with project registry.
 
-Exit: can fork a variant, run a command, and apply a patch bundle.
+Exit: can fork a variant, run ANY tool inside it, capture changes as patch.
 
-## Phase 1: MVP user loop (fast iteration)
-Focus: test ideas with actual tools and fast feedback.
+**Layer 1 validation**: User runs `lazyagent fork && opencode` (or cursor, or claude) and it just works.
+
+## Phase 1: MVP user loop (Layer 1 complete + Layer 2 starts)
+Focus: complete CLI + TUI loop, begin config/skill export plugins.
 
 Deliverables:
 - Project onboarding (TUI): clone + init + registry.
 - Embedded PTY sessions (native).
 - Baseline merge flow with gates (lint/test/build).
 - Port allocation at startup (static mapping) + UI display.
-- Minimal adapter export for OpenCode (config files only).
+- Minimal memory store (facts/decisions files).
+- **Layer 2**: OpenCode export plugin (opencode.json, .opencode/*).
 
 Exit: a user can onboard a repo, fork, run an agent, and merge safely.
+
+**Layer 1 complete**: CLI + TUI works with any tool.
+**Layer 2 begins**: OpenCode users get config/skill export.
 
 ## Phase 2: Containers + sidecar + env spec
 Focus: true isolation and repeatable environments.
@@ -45,17 +66,23 @@ Deliverables:
 
 Exit: containerized variants with auditable env changes.
 
-## Phase 3: Capabilities, context, and memory UX
-Focus: transparency and managed skills.
+## Phase 3: Capabilities, context, and memory UX (Layer 2 + 3 + 4)
+Focus: transparency, managed skills, deep OpenCode collaboration, protocol docs.
 
 Deliverables:
 - Capability registry (skills/plugins/MCPs) with tags/groups.
 - Role profiles with on/off toggles.
 - Context pack builder with provenance and budgets.
 - Memory view + candidate approvals + restart prompts.
-- Cursor adapter export (rules files).
+- **Layer 2**: More export plugins (Cursor, Claude Code, Aider).
+- **Layer 3**: OpenCode deep - skill sync, hook integration, upstream contributions.
+- **Layer 4**: Document context pack schema, variant metadata format.
 
 Exit: repeatable roles, transparent context, managed skills.
+
+**Layer 2 mature**: Multiple tool exports working.
+**Layer 3 active**: OpenCode collaboration underway.
+**Layer 4 begins**: Other tools can follow documented specs.
 
 ## Phase 4: Agentic merge modes + refactor
 Focus: advanced merge value and cleanup.

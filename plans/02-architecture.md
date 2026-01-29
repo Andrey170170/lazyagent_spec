@@ -39,9 +39,12 @@
   - `memory/`: decisions, assumptions, invariants, candidates.
   - `runs/`: stdout/stderr logs and artifacts.
 
-### Generated tool configs (per-variant worktree root)
+### Generated tool configs (per-variant worktree root, via Layer 2 export plugins)
 - OpenCode: `opencode.json` + `.opencode/*`
-- Cursor: `.cursor/rules/*` or `.cursorrules`
+- Cursor: `.cursorrules` or `.cursor/rules/*`
+- Claude Code: `.claude/skills/*`, `CLAUDE.md`
+- Generic: Markdown prompt blocks in known paths
+- Fallback (Layer 1): `LAZYAGENT_*` env vars for any tool
 
 ## Config resolution order
 1. Global defaults (`~/.config/agentplane`).
@@ -109,11 +112,45 @@
 ## Capability manager design
 - Canonical registry for prompts, skills, hooks, and policies.
 - Role profiles = named sets of skills + permissions.
-- Adapters export into tool-specific formats:
-  - OpenCode: opencode.json and .opencode/* directories.
-  - Cursor: .cursorrules or .cursor/rules (if used).
-  - MVP first-class targets: OpenCode and Cursor.
-  - CLI agents: generate prompt blocks or config snippets.
+
+### Two types of "adapters" - important distinction
+
+**Config/Skill Export (Good - We Build These)**
+- Convert canonical skills/configs to tool-specific formats
+- Export to `.cursorrules`, `opencode.json`, Claude Code skills, etc.
+- Stable: these are documented config file formats
+- This is the core value prop: one source, multiple tool outputs
+
+**Deep Behavioral Integration (Risky - We Avoid This)**
+- Hooking into tool internals, intercepting behavior
+- Depending on undocumented APIs or data structures
+- Breaks on minor tool updates
+
+### Integration layers
+
+**Layer 1: CLI + TUI Foundation**
+- Core platform: workspace, env, context, merge
+- Works with ANY tool even without export plugins
+- TUI provides dashboard for variants, runs, sessions
+
+**Layer 2: Config/Skill Export Plugins**
+- "Adapt project for work with X tool" feature
+- Plugin architecture: canonical format in → tool format out
+- Supported: OpenCode, Cursor, Claude Code, Aider, generic markdown
+- Community can contribute new export plugins
+
+**Layer 3: OpenCode Deep Integration**
+- OSS collaboration, not fragile adaptation
+- Contribute features upstream
+- Co-design APIs and shared formats
+- Native support for LazyAgent workspaces in OpenCode
+
+**Layer 4: Emergent Protocol**
+- Document stable patterns as schemas
+- Integration guides for tool authors
+- We maintain docs, not behavioral adapters
+
+See `plans/16-integration-strategy.md` for full details.
 
 ## Merge planner design
 - Agentic merge assistance with explicit merge plans.

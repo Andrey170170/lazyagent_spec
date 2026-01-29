@@ -29,7 +29,9 @@ Provide a unified, local-first workspace layer that turns agentic coding into a 
 - Local-first and offline-capable by default; no cloud dependency required.
 - Explicit over implicit: context, capabilities, and permissions are inspectable artifacts.
 - Isolation by default for parallel runs; safe merging with verification gates.
-- Tool-agnostic core with adapters for popular agent tools.
+- Tool-agnostic foundation: CLI + TUI work with any agent tool out of the box.
+- Config/skill export over behavioral hooks: stable format conversion, not brittle integrations.
+- Deep collaboration where it matters: OpenCode as first-class OSS partner.
 - Minimal cognitive load: a single dashboard of variants, runs, and context.
 - TUI-first UX with fast keyboard-driven workflows.
 - Sidecar bridge for tool integration and container session status.
@@ -43,8 +45,56 @@ Provide a unified, local-first workspace layer that turns agentic coding into a 
 ## Scope framing
 - "Max" vision: all planes (variant, runtime, capability, context, merge, workflow).
 - MVP path: start with variants, context packs, and patch bundles, then layer isolation.
-- First-class tool adapters in MVP: OpenCode and Cursor (add others later).
 - MVP implementation: Python-first (Textual TUI), with possible Go rewrite later.
+
+## Integration strategy (layered)
+
+**Key distinction:** Config/skill export (converting to `.cursorrules`, `opencode.json`, etc.) is stable and valuable. Deep behavioral integration (hooking into tool internals) is risky. We do the former liberally, the latter selectively.
+
+```
+┌─────────────────────────────────────────┐
+│  Layer 4: Protocol/Standard             │  ← Emerges from usage
+│  Documented schemas, integration guides │
+├─────────────────────────────────────────┤
+│  Layer 3: OpenCode Deep Integration     │  ← OSS collaboration
+│  Upstream contributions, co-evolution   │
+├─────────────────────────────────────────┤
+│  Layer 2: Config/Skill Export Plugins   │  ← Works with many tools
+│  .cursorrules, opencode.json, etc.      │
+├─────────────────────────────────────────┤
+│  Layer 1: CLI + TUI Foundation          │  ← Core platform
+│  Workspace, env, context, merge         │
+└─────────────────────────────────────────┘
+```
+
+### Layer 1: CLI + TUI Foundation (Core Platform)
+The base platform that everything builds on:
+- **CLI**: `lazyagent fork`, `run`, `merge`, `status`, etc.
+- **TUI**: Dashboard for variants, runs, context, and sessions (Textual)
+- **Daemon**: Source of truth for workspace state
+- Works with ANY tool even without export plugins
+
+### Layer 2: Config/Skill Export Plugins
+"Adapt the project for work with X tool" - converting canonical configs to tool formats:
+- Export to `.cursorrules` for Cursor
+- Export to `opencode.json` and `.opencode/*` for OpenCode
+- Export to Claude Code's skill format
+- Community can contribute new export plugins
+- **Stable**: these are documented config formats, not behavioral hooks
+
+### Layer 3: OpenCode Deep Integration (OSS Collaboration)
+Go beyond config export with one OSS project:
+- Contribute features upstream that benefit both projects
+- Co-design APIs where LazyAgent and OpenCode interact
+- Shared skill/context formats understood natively
+- **Collaboration, not fragile adaptation**
+
+### Layer 4: Protocol/Standard (Emergent)
+As Layers 1-3 mature, patterns stabilize into standards:
+- Context pack format becomes documented schema
+- Skill manifest becomes reusable specification
+- Other tools can integrate by following specs
+- We maintain docs, not behavioral adapters
 
 ## Document map
 - plans/01-requirements.md
@@ -62,3 +112,4 @@ Provide a unified, local-first workspace layer that turns agentic coding into a 
 - plans/13-memory.md
 - plans/14-merging.md
 - plans/15-monetization.md
+- plans/16-integration-strategy.md

@@ -4,6 +4,39 @@
 - Full transparency of active skills/configs per session.
 - Managed entities for skills, plugins, and MCP servers.
 - Searchable, taggable, and groupable capability sets.
+- Canonical format with export plugins for multiple tools.
+
+## Integration strategy alignment
+
+This capability system follows the 4-layer integration approach.
+
+### Key distinction
+**Config/skill export** (converting to `.cursorrules`, `opencode.json`, etc.) is stable and valuable - it's exactly the problem we're solving. **Deep behavioral integration** (hooking into tool internals) is risky and we avoid it.
+
+### Layer 1: CLI + TUI Foundation
+- Capabilities stored in canonical format (YAML/JSON).
+- TUI shows "Active Config" panel per session.
+- CLI exposes capabilities via environment variables and file paths.
+- Works with any tool even without export plugins.
+
+### Layer 2: Config/Skill Export Plugins
+- "Adapt project for work with X tool" feature.
+- Export to `.cursorrules` for Cursor.
+- Export to `opencode.json` and `.opencode/*` for OpenCode.
+- Export to Claude Code's skill format.
+- Plugin architecture: canonical in → tool format out.
+- Community can contribute new export plugins.
+
+### Layer 3: OpenCode Deep Integration
+- OSS collaboration beyond config export.
+- Skill sync: bidirectional where it makes sense.
+- Hook integration: LazyAgent events ↔ OpenCode events.
+- Upstream contributions: features that belong in OpenCode go there.
+
+### Layer 4: Protocol/Standard
+- Document capability manifest schema.
+- Publish skill pack format specification.
+- Integration guide for tool authors.
 
 ## Managed entities
 - Skill: prompt + docs + tools/policies.
@@ -40,3 +73,39 @@ Each entity has:
 ## Import and discovery (later)
 - Registry search for skills/plugins.
 - Version pinning and auto-update options.
+
+## Tool integration approach
+
+### Any tool (Layer 1 - foundation)
+- Capabilities exposed via file paths in environment.
+- `LAZYAGENT_SKILLS_PATH`, `LAZYAGENT_CONTEXT_PATH`, etc.
+- Tools that support custom prompts/context can read these paths.
+- Works even without any export plugins installed.
+
+### Export plugins (Layer 2 - config/skill export)
+
+| Tool | Export Format | Notes |
+|------|--------------|-------|
+| OpenCode | `opencode.json`, `.opencode/*` | First-class |
+| Cursor | `.cursorrules`, `.cursor/rules/*` | Stable format |
+| Claude Code | Skills directory, CLAUDE.md | Documented |
+| Aider | `.aider.conf.yml`, conventions | Stable format |
+| Generic | Markdown prompt blocks | Fallback |
+
+**Plugin architecture:**
+- Canonical skill/config → export plugin → tool-specific format
+- Each plugin is isolated; one breaking doesn't affect others
+- Users/community can add new export targets
+
+### OpenCode (Layer 3 - deep collaboration)
+- Beyond config export: actual OSS collaboration.
+- Memory files injected into OpenCode's context automatically.
+- Role profiles map to OpenCode permission sets.
+- We dogfood this daily; integration grows from real usage.
+- Contribute features upstream when they belong in OpenCode.
+
+### Protocol (Layer 4 - documentation)
+- Document the capability manifest format.
+- Publish integration guide with examples.
+- Tools can adopt the spec if they choose.
+- We maintain docs, not behavioral adapters.
