@@ -30,6 +30,7 @@ This repository contains the product and technical specification for a local-fir
 - `plans/12-capabilities-management.md`
 - `plans/13-memory.md`
 - `plans/14-merging.md`
+- `plans/15-monetization.md`
 
 ## Working notes
 - This repo is intentionally small; code will be added after the spec is validated.

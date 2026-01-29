@@ -61,3 +61,4 @@ Provide a unified, local-first workspace layer that turns agentic coding into a 
 - plans/12-capabilities-management.md
 - plans/13-memory.md
 - plans/14-merging.md
+- plans/15-monetization.md
