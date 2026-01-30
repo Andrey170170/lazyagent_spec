@@ -13,10 +13,10 @@ This capability system follows the 4-layer integration approach.
 ### Key distinction
 **Config/skill export** (converting to `.cursorrules`, `opencode.json`, etc.) is stable and valuable - it's exactly the problem we're solving. **Deep behavioral integration** (hooking into tool internals) is risky and we avoid it.
 
-### Layer 1: CLI + TUI Foundation
+### Layer 1: CLI-first Foundation (UI optional)
 - Capabilities stored in canonical format (YAML/JSON).
-- TUI shows "Active Config" panel per session.
 - CLI exposes capabilities via environment variables and file paths.
+- Optional UI shows "Active Config" panel per session.
 - Works with any tool even without export plugins.
 
 ### Layer 2: Config/Skill Export Plugins

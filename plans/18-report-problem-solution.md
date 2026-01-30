@@ -19,6 +19,7 @@ LazyAgent is a local-first control plane that turns agentic coding into a discip
 
 - Variants: parallel workspaces backed by git worktrees, with explicit lifecycle and metadata.
 - Environments: native/devcontainer/compose profiles with drift detection, promotion to a canonical env spec, and predictable port allocation.
+- Project creation: CLI wizard with runtime/tool selection, project-local blueprints, and reusable templates.
 - Capabilities: a canonical registry of skills/prompts/policies and role profiles, exported into multiple tool formats via stable config/skill export plugins.
 - Context and memory: context packs as explicit artifacts with provenance/budgets, and durable memory (decisions/assumptions/invariants) with approval-gated candidates.
 - Merging: patch bundles + deterministic merge plans + verification gates; optional advanced merge modes remain opt-in and auditable.
@@ -71,14 +72,14 @@ Key differentiators (especially relative to Sculptor/Conductor/Superconductor/Gr
 ### Tech stack (MVP)
 - Python 3.12+ (uv-managed), ruff, pytest, ty.
 - Daemon/API: FastAPI + uvicorn (local RPC; Unix socket preferred).
-- TUI: Textual (keyboard-first; supports embedded PTY sessions).
-- CLI: Typer.
+- UI client (optional, later): simple GUI or TUI for dashboards/PTY.
+- CLI (primary): Typer.
 - Sidecar bridge (containers): lightweight Python process for PTY streaming + status.
 - Integrations: git CLI for worktrees/patches; Docker/devcontainer/compose for environments; optional VS Code/Cursor extension in TypeScript.
 
 ### Architecture (high level)
 - Daemon is the source of truth for workspace state (projects, variants, runs, artifacts).
-- CLI/TUI are clients that attach from any directory.
+- CLI is the primary client; UI clients are optional later and attach via the same daemon.
 - Variants are git worktrees with metadata.
 - Context packs and memory live in `.agentplane/` and are linked to runs.
 - Capabilities are canonical and exported to tool-specific formats via plugins.

@@ -6,7 +6,7 @@ LazyAgent is a local-first control plane for agent-driven development that makes
 
 ### High-level components
 - Daemon (local source of truth): manages workspace registry, variants, runs, adapters, and artifacts.
-- CLI + TUI clients: attach to the daemon from any directory; TUI is keyboard-first and can embed tool sessions via PTY.
+- CLI (primary) attaches to the daemon from any directory; UI clients are optional later (GUI/TUI/extension).
 - Variant manager: uses git worktrees to create parallel workspaces with metadata and lifecycle states.
 - Run executor: runs commands in native or containerized environments; captures stdout/stderr and artifacts.
 - Environment manager + sidecar bridge (containers): builds/attaches devcontainers/compose, streams PTY, detects drift, allocates ports.
@@ -20,7 +20,7 @@ LazyAgent is a local-first control plane for agent-driven development that makes
 - Generated tool configs (per variant worktree root): e.g. `opencode.json`, `.opencode/*`, `.cursor/*`.
 
 ### Integration strategy
-- Layer 1 (foundation): CLI/TUI + daemon work with any agent tool via standard workspace/env/context artifacts.
+- Layer 1 (foundation): CLI-first + daemon work with any agent tool via standard workspace/env/context artifacts; UI optional later.
 - Layer 2 (export plugins): convert canonical configs/skills to tool formats (OpenCode, Cursor, Claude Code, Aider, generic).
 - Layer 3 (deep OpenCode collaboration): co-evolve with one OSS tool where deeper integration is worth it.
 - Layer 4 (protocol): document stable schemas (context packs, variant metadata, skill manifests, memory format).
@@ -42,13 +42,15 @@ LazyAgent is a local-first control plane for agent-driven development that makes
 
 ### Walkthroughs (end-to-end)
 - Workspace init: detect repo + main branch; create default role/env; register baseline facts.
-- Onboard project (TUI): add Git URL/local path; clone (if needed); init; show in sidebar.
-- Fork variant (TUI/CLI): create git worktree from base ref; attach role/env; build env in background.
+- Create project (CLI wizard): pick template or create-as, choose runtime/tools, scaffold repo, register, optional save-as-template.
+- Onboard project (CLI): add Git URL/local path; clone (if needed); init; show in status output.
+- Fork variant (CLI; UI optional later): create git worktree from base ref; attach role/env; build env in background.
 - Run work: execute commands; capture run logs and artifacts; lock a context pack for the run.
 - Memory formation: generate candidate memories from runs; user approves/rejects; promote to durable memory; restart prompt.
 - Merge: generate merge plan; reconcile env specs/overlays; apply patch bundles in order (3-way fallback); run gates; archive variants.
 
 ### Feature list (by area)
+- Project creation: CLI wizard with runtime/tool selection; create-from-template; create-as-project; optional template export.
 - Variants: create/switch/list/archive/delete; metadata (base ref, purpose, role/env, timestamps); diff/test status comparisons.
 - Environments: native/devcontainer/compose profiles; optional resource/network restrictions; port allocation mapping; drift detection + promotion.
 - Capabilities: canonical registry (skills/plugins/MCPs/policies); role profiles; active-config visibility; export plugins to tools.
@@ -77,7 +79,7 @@ LazyAgent is a local-first control plane for agent-driven development that makes
 - Local auth model: prefer Unix socket + file permissions for daemon access.
 
 ### Usability
-- Keyboard-first TUI with quick session switching and non-blocking progress.
+- CLI-first with fast, keyboard-driven workflows; optional UI clients add dashboards and quick switching.
 - Explicit state labels and inspectable artifacts (active config, context pack inspector, merge plan view).
 - Tool-agnostic default behavior; export plugins add convenience without locking users in.
 
@@ -117,7 +119,7 @@ LazyAgent is a local-first control plane for agent-driven development that makes
 ## Deployment, Testing, Validation
 
 ### Deployment model (local)
-- Distribution targets: local daemon + CLI + TUI; optional container-side sidecar.
+- Distribution targets: local daemon + CLI; optional UI client; optional container-side sidecar.
 - Environment support: native first; devcontainers/compose when available.
 - Editor integration: optional VS Code/Cursor extension to attach to variant environments.
 
@@ -192,7 +194,7 @@ Milestones follow the layered integration strategy and the phased roadmap.
 - Exit criteria: fork a variant, run any tool inside it, export a patch bundle.
 
 ### Phase 1: MVP user loop (Layer 1 complete, Layer 2 starts)
-- Deliver: TUI onboarding; embedded PTY (native); baseline merge with gates; static port allocation mapping; minimal memory store; OpenCode export plugin.
+- Deliver: CLI onboarding; embedded PTY (native); baseline merge with gates; static port allocation mapping; minimal memory store; OpenCode export plugin; UI assessment post-Phase 1.
 - Exit criteria: onboard -> fork -> run agent -> merge safely with gates.
 
 ### Phase 2: Containers + sidecar + env spec

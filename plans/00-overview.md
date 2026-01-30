@@ -10,11 +10,12 @@ It standardizes workspaces, environments, capability sets, context packs, and me
 
 ## Current summary
 - Spec-first repository; primary output lives under `plans/`.
-- Python-first MVP with Textual TUI, FastAPI daemon, Typer CLI, sidecar bridge.
-- Daemon is the primary source of truth; clients attach from any directory.
+- Python-first MVP with daemon + CLI core (Typer) and sidecar bridge; UI clients deferred.
+- Daemon is the primary source of truth; CLI is primary client; UI clients optional later.
 - Canonical env spec in `.agentplane/env/spec.json`; devcontainer configs generated.
 - Memory uses Markdown with frontmatter; candidates require approval.
 - Port allocation at startup; dynamic remap via proxy is future work.
+- Project creation wizard (CLI-first) with project-local config and optional reusable templates.
 
 ## Problem statement (condensed)
 - Capability sprawl: each tool has its own config and skill folders.
@@ -29,11 +30,11 @@ Provide a unified, local-first workspace layer that turns agentic coding into a 
 - Local-first and offline-capable by default; no cloud dependency required.
 - Explicit over implicit: context, capabilities, and permissions are inspectable artifacts.
 - Isolation by default for parallel runs; safe merging with verification gates.
-- Tool-agnostic foundation: CLI + TUI work with any agent tool out of the box.
+- Tool-agnostic foundation: CLI works with any agent tool out of the box; UI clients optional later.
 - Config/skill export over behavioral hooks: stable format conversion, not brittle integrations.
 - Deep collaboration where it matters: OpenCode as first-class OSS partner.
-- Minimal cognitive load: a single dashboard of variants, runs, and context.
-- TUI-first UX with fast keyboard-driven workflows.
+- Minimal cognitive load: a single status surface (CLI summaries; optional dashboard later).
+- CLI-first UX with fast keyboard-driven workflows; UI requirements assessed after CLI validation.
 - Sidecar bridge for tool integration and container session status.
 
 ## Glossary
@@ -45,7 +46,7 @@ Provide a unified, local-first workspace layer that turns agentic coding into a 
 ## Scope framing
 - "Max" vision: all planes (variant, runtime, capability, context, merge, workflow).
 - MVP path: start with variants, context packs, and patch bundles, then layer isolation.
-- MVP implementation: Python-first (Textual TUI), with possible Go rewrite later.
+- MVP implementation: Python-first daemon + CLI; UI clients evaluated post-MVP; possible Go rewrite later.
 
 ## Integration strategy (layered)
 
@@ -62,15 +63,15 @@ Provide a unified, local-first workspace layer that turns agentic coding into a 
 │  Layer 2: Config/Skill Export Plugins   │  ← Works with many tools
 │  .cursorrules, opencode.json, etc.      │
 ├─────────────────────────────────────────┤
-│  Layer 1: CLI + TUI Foundation          │  ← Core platform
+│  Layer 1: CLI-first Foundation          │  ← Core platform
 │  Workspace, env, context, merge         │
 └─────────────────────────────────────────┘
 ```
 
-### Layer 1: CLI + TUI Foundation (Core Platform)
+### Layer 1: CLI-first Foundation (Core Platform)
 The base platform that everything builds on:
-- **CLI**: `lazyagent fork`, `run`, `merge`, `status`, etc.
-- **TUI**: Dashboard for variants, runs, context, and sessions (Textual)
+- **CLI (primary)**: `lazyagent fork`, `run`, `merge`, `status`, etc.
+- **UI clients (optional, later)**: simple GUI, TUI, or VS Code extension for dashboards/sessions
 - **Daemon**: Source of truth for workspace state
 - Works with ANY tool even without export plugins
 

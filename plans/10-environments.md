@@ -13,14 +13,14 @@
 
 ## Template store
 - Built-in templates (Python, Node, Rust, Go, ML/GPU).
-- Local templates stored under `~/.config/agentplane/templates/`.
+- Local templates stored under `~/.config/agentplane/templates/env/`.
 - Remote templates from a registry (optional later).
 
 Template metadata fields (example):
 - `id`, `name`, `base_image`, `features[]`, `defaults`, `labels`.
 
-## Template builder (TUI)
-- Detect project type from repo files.
+## Template builder (CLI-first; UI optional)
+- Detect project type from repo files or wizard selections.
 - Offer a recommended template.
 - Optional checkboxes for features: git, uv, node, docker-in-docker, GPU.
 - Generate env spec + devcontainer/Dockerfile from selections.
@@ -54,7 +54,7 @@ Each detected change is recorded to `journal.jsonl` with:
 Variants can keep changes as overlays or promote to spec.
 
 ## Promote flow
-1. Show detected changes in TUI.
+1. Show detected changes in CLI (with optional UI view).
 2. User chooses to persist or discard.
 3. Persisted changes update `spec.json`.
 4. Regenerate devcontainer config/Dockerfile.

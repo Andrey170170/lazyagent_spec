@@ -24,8 +24,9 @@
 ## Open product questions
 - Primary user persona for MVP: solo devs or small teams?
 - Which agent tools must be first-class in v1?
-- Should the initial UI be CLI-only or include a lightweight dashboard?
+- When to introduce an optional UI client (GUI/TUI/extension), and which views are highest value?
 - How strict should permission enforcement be by default?
+- What should the minimum viable template format include (runtime, tools, docs, env spec)?
 
 ## Open technical questions
 - Preferred workspace metadata location and naming (.agentplane/ vs other).

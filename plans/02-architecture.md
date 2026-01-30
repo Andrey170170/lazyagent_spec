@@ -1,10 +1,11 @@
 # Architecture
 
 ## High-level components
-- CLI and daemon (local): orchestrates variants, runs, and adapters.
-- Daemon is the primary source of truth; TUI/CLI are clients.
+- CLI (primary) and daemon (local): orchestrates variants, runs, and adapters.
+- Daemon is the primary source of truth; CLI is primary client, UI optional later.
 - Workspace registry: stores metadata for variants, roles, env profiles.
 - Project manager: clones and registers repos in managed root.
+- Project scaffolder: drives creation wizard, project blueprints, and templates.
 - Variant manager: wraps git worktrees and branch lifecycle.
 - Run executor: executes commands in isolated environments.
 - Session manager: handles tool sessions and PTY streams.
@@ -12,11 +13,11 @@
 - Memory manager: maintains decisions/assumptions and candidate memories.
 - Capability manager: stores skills/prompts and exports to tools.
 - Merge planner: builds patch bundles and merge plans.
-- UI (optional early): dashboard for variants, context, and runs.
+- UI clients (optional, later): dashboard for variants, context, and runs (GUI/TUI/extension).
 
 ## MVP implementation choices
-- Python 3.12+ for daemon, TUI, and sidecar.
-- Textual for TUI; Typer for CLI.
+- Python 3.12+ for daemon and sidecar.
+- Typer for CLI; UI client TBD (Textual if TUI is chosen later).
 - VS Code/Cursor extension in TypeScript.
 
 ## Proposed local file layout (working names)
@@ -128,10 +129,10 @@
 
 ### Integration layers
 
-**Layer 1: CLI + TUI Foundation**
+**Layer 1: CLI-first Foundation**
 - Core platform: workspace, env, context, merge
 - Works with ANY tool even without export plugins
-- TUI provides dashboard for variants, runs, sessions
+- UI optional for dashboard views and sessions
 
 **Layer 2: Config/Skill Export Plugins**
 - "Adapt project for work with X tool" feature

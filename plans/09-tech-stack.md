@@ -12,15 +12,15 @@ MVP is Python-first to maximize team speed and iteration. Rewrites to Go can hap
 
 ## Services and UI
 - Daemon/API: Python async service (HTTP over Unix socket preferred).
-- TUI: Textual (Python) with embedded PTY support for tool sessions.
-- CLI: Typer (Python) for a thin command surface that calls the daemon.
+- CLI: Typer (Python) for the primary command surface that calls the daemon.
 - Sidecar bridge: Python process inside containers for PTY streaming + status.
- - Daemon runs continuously; TUI/CLI attach from any directory.
+- UI client (deferred): simple GUI or TUI for dashboards/PTY if needed.
+- Daemon runs continuously; CLI is primary, UI optional later.
 
 ## Python libraries (planned)
 - Async runtime: `asyncio` (stdlib).
 - API server: `FastAPI` + `uvicorn` (ASGI) with WebSocket support.
-- TUI: `textual` (built on `rich`).
+- TUI (optional, later): `textual` (built on `rich`) if a TUI is chosen.
 - CLI: `typer` (+ `rich` for output).
 - PTY streaming: `pty` (Unix stdlib) + asyncio streams; Windows later via `pywinpty`.
 - Validation/config models: `pydantic` (or `dataclasses` + `jsonschema` fallback).
@@ -50,4 +50,4 @@ MVP is Python-first to maximize team speed and iteration. Rewrites to Go can hap
 ## Rewrite path (post-MVP)
 - Keep RPC contracts stable so services can be swapped.
 - Target Go for daemon + sidecar if performance/packaging becomes a bottleneck.
-- Leave TUI in Python or replace with Go TUI later.
+- UI client tech TBD; if a TUI is chosen, keep in Python or replace later.

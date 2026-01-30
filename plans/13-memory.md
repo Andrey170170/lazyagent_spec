@@ -31,7 +31,7 @@ tags: [ui, tui]
 source: run-2026-01-27-3
 updated: 2026-01-27
 ---
-Decision: Use Textual for the MVP TUI.
+Decision: If a TUI is chosen later, use Textual for the initial implementation.
 Rationale: Fast iteration and team familiarity.
 ```
 

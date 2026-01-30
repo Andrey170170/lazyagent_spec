@@ -14,12 +14,15 @@ Located at `~/.config/agentplane/`.
 - `skills/`: reusable skill packs (global scope).
 - `profiles/`: reusable role profiles (global scope).
 - `adapters/`: templates and defaults for tool adapters.
+- `templates/env/`: reusable environment templates.
+- `templates/project/`: reusable project templates (saved from wizard).
 
 ## Per-project store
 Located at `<repo>/.agentplane/` and git-ignored by default.
 
 ### Contents
 - `workspace.json`: project metadata, default role/env, adapter settings.
+- `project.json`: project creation blueprint (language, runtime, tool packs, choices).
 - `skills/`: project-specific skill overrides and prompts.
 - `profiles/`: project-specific role profiles.
 - `env/`: environment spec and journal (see below).

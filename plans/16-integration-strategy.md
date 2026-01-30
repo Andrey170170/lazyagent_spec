@@ -44,20 +44,20 @@ Hooking into tool internals, intercepting behavior, depending on undocumented AP
 │  Layer 2: Config/Skill Export Plugins   │  ← Works with many tools
 │  .cursorrules, opencode.json, etc.      │
 ├─────────────────────────────────────────┤
-│  Layer 1: CLI + TUI Foundation          │  ← Core platform
+│  Layer 1: CLI-first Foundation          │  ← Core platform
 │  Workspace, env, context, merge         │
 └─────────────────────────────────────────┘
 ```
 
 ---
 
-## Layer 1: CLI + TUI Foundation
+## Layer 1: CLI-first Foundation (UI optional)
 
 **The core platform that everything builds on.**
 
 ### Components
-- **CLI**: `lazyagent fork`, `run`, `merge`, `status`, etc.
-- **TUI**: Dashboard for variants, runs, context, and sessions
+- **CLI (primary)**: `lazyagent fork`, `run`, `merge`, `status`, etc.
+- **UI clients (optional, later)**: dashboard/sessions via GUI, TUI, or extension
 - **Daemon**: Source of truth for workspace state
 
 ### What it manages
@@ -185,7 +185,7 @@ Published documentation:
 
 | Phase | Layer 1 | Layer 2 | Layer 3 | Layer 4 |
 |-------|---------|---------|---------|---------|
-| 0 | CLI + TUI skeleton | - | - | - |
+| 0 | CLI skeleton (UI optional later) | - | - | - |
 | 1 | Core features | OpenCode export | Begin collaboration | - |
 | 2 | Containers, env | Cursor export | Deepen integration | - |
 | 3 | Polish, stability | More plugins | Upstream contribs | Document schemas |
@@ -217,7 +217,7 @@ Published documentation:
 
 | Layer | What | Stability | Effort |
 |-------|------|-----------|--------|
-| 1 | CLI + TUI | Core platform | High (we own it) |
+| 1 | CLI-first (UI optional) | Core platform | High (we own it) |
 | 2 | Config export | Stable (documented formats) | Medium per plugin |
 | 3 | OpenCode deep | Collaborative (OSS) | High (relationship) |
 | 4 | Protocol | Emergent (docs) | Low (documentation) |

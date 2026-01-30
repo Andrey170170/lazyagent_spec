@@ -20,7 +20,7 @@ Local‑first features have low marginal cost:
 ## Proposed tiering
 
 ### Free (core)
-- TUI/CLI + daemon.
+- CLI + daemon; optional UI client.
 - Project onboarding + variants (worktrees).
 - Environment specs and templates (local only).
 - Context packs (manual selection + review).
@@ -48,7 +48,7 @@ Local‑first features have low marginal cost:
 
 ## Feature gating (technical)
 - Daemon enforces feature flags from license.
-- TUI/CLI hide or lock paid actions when unavailable.
+- CLI (primary) and optional UI clients hide or lock paid actions when unavailable.
 - All artifacts remain local; gating controls behavior, not data access.
 
 ## Pricing signals (non‑final)

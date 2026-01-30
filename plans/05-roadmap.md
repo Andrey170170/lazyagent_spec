@@ -8,7 +8,7 @@ Each phase yields a working slice that can be tested with real agents.
 The roadmap follows the 4-layer integration strategy:
 
 ```
-Phase 0-1: Layer 1 (CLI + TUI Foundation) - core platform
+Phase 0-1: Layer 1 (CLI-first Foundation) - core platform
 Phase 1-2: Layer 2 (Config/Skill Export) - OpenCode, Cursor, etc.
 Phase 2-3: Layer 3 (OpenCode Deep) - OSS collaboration
 Phase 3+:  Layer 4 (Protocol) - document patterns as specs
@@ -18,16 +18,17 @@ See `plans/16-integration-strategy.md` for layer details.
 
 ## Workstreams (team of 4)
 - Core/Daemon: registry, variants, run executor, APIs.
-- TUI/UX: navigation, session views, status, search.
+- CLI/UX: prompts, output formatting, status views.
 - Env/Sidecar: containers, env spec, drift detection, port mapping.
 - Merge/Agentic: patch bundles, merge plans, refactor modes.
+- UI Clients (post-CLI): evaluate GUI vs TUI; VS Code extension for observability.
 
 ## Phase 0: Scaffolding and vertical slice (Layer 1)
-Focus: CLI + TUI foundation that works with ANY agent tool.
+Focus: CLI-first foundation that works with ANY agent tool.
 
 Deliverables:
 - CLI commands: `lazyagent init`, `lazyagent fork`, `lazyagent list`.
-- TUI skeleton (project list, variant list, status area).
+- CLI project creation wizard (new project + register) with project-local blueprint.
 - Variant manager wrapping git worktrees.
 - Native run executor: `lazyagent run <any-command>` with logs.
 - Basic context snapshot on fork (tracked files, git state).
@@ -39,20 +40,30 @@ Exit: can fork a variant, run ANY tool inside it, capture changes as patch.
 **Layer 1 validation**: User runs `lazyagent fork && opencode` (or cursor, or claude) and it just works.
 
 ## Phase 1: MVP user loop (Layer 1 complete + Layer 2 starts)
-Focus: complete CLI + TUI loop, begin config/skill export plugins.
+Focus: complete CLI loop, begin config/skill export plugins.
 
 Deliverables:
-- Project onboarding (TUI): clone + init + registry.
-- Embedded PTY sessions (native).
+- Project onboarding (CLI): clone + init + registry.
+- Embedded PTY sessions (native), accessible via CLI.
+- "Create from template" and "create as project" flows with prefilled wizard choices.
+- Optional save-as-template prompt and template export utility.
 - Baseline merge flow with gates (lint/test/build).
-- Port allocation at startup (static mapping) + UI display.
+- Port allocation at startup (static mapping) + CLI display.
 - Minimal memory store (facts/decisions files).
 - **Layer 2**: OpenCode export plugin (opencode.json, .opencode/*).
 
 Exit: a user can onboard a repo, fork, run an agent, and merge safely.
 
-**Layer 1 complete**: CLI + TUI works with any tool.
+**Layer 1 complete**: CLI core works with any tool; UI clients deferred.
 **Layer 2 begins**: OpenCode users get config/skill export.
+
+## UI assessment checkpoint (post-Phase 1)
+Focus: decide if a UI client is needed based on CLI usage.
+
+Deliverables:
+- UI requirements list driven by real CLI workflows.
+- Decision: simple GUI dashboard, TUI, VS Code extension, or none.
+- If chosen, a minimal read-only dashboard for observability and quick switching.
 
 ## Phase 2: Containers + sidecar + env spec
 Focus: true isolation and repeatable environments.
@@ -102,7 +113,7 @@ Focus: multi-agent pipelines and governance.
 Deliverables:
 - Declarative workflow runner with step artifacts.
 - Parallel worker dispatch to variants.
-- UI dashboard for multi-run status.
+- Optional UI dashboard or VS Code extension for multi-run status; CLI provides status outputs.
 - Policy enforcement for roles and commands.
 
 Exit: repeatable multi-agent pipelines.

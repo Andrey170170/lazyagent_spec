@@ -14,9 +14,19 @@
 ## Functional requirements
 
 ### Project onboarding
-- TUI-first flow to register or clone projects.
+- CLI-first flow to register or clone projects; UI optional.
 - Optional Git URL input to clone into a managed projects root.
 - Initialize workspace metadata automatically after clone.
+
+### Project creation wizard (CLI-first)
+- Create new projects via a guided wizard (language, package manager, location).
+- Select runtime profile (native or Docker for MVP; more providers later).
+- Pick tool packs (e.g., eza, fzf) and agent tools from a registry.
+- Scaffold baseline docs/configs and record decisions for later recall.
+- Store the initial project blueprint locally for reuse ("create as X").
+- Wizard can start from a reusable template or an existing project.
+- Prompt at the end to save as a reusable template (default: no).
+- Provide a separate utility to save a named template from a project.
 
 ### Variants (project state plane)
 - Create, switch, list, archive, and delete variants quickly.
@@ -57,11 +67,9 @@
 - Persist artifacts per step: patch bundle, context pack, run logs.
 
 ### UX and sessions
-- TUI provides fork flow with naming prompt and spinner during setup.
-- Sidebar shows running variants with status, build logs, and warnings.
-- Initialization uses sidebar spinner without blocking main view.
-- Quick session switching between variants.
-- VS Code/Cursor extension integration for container attach.
+- CLI provides fork flow with prompts and non-blocking progress output.
+- Optional UI client (GUI/TUI/extension) may add dashboards and quick switching after CLI validation.
+- VS Code/Cursor extension integration for container attach and observability.
 
 ## Non-functional requirements
 - Local-first: all core features work offline.

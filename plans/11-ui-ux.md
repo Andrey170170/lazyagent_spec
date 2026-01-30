@@ -1,4 +1,8 @@
-# UI/UX design doc (TUI-first)
+# UI/UX design notes (deferred; UI TBD)
+
+CLI is the primary interface for all workflows. UI work is deferred until after CLI validation.
+This doc sketches a potential dashboard experience; the eventual client may be a simple GUI,
+TUI, or a VS Code/Cursor extension.
 
 ## Mock
 
@@ -9,6 +13,7 @@
 [figma make mockup](https://www.figma.com/make/EeKVsngadEeoWTRRdP5CRB/TUI-Project-Management-App?t=t56ebnKEv8vVGpIe-1)
 
 ## Goals
+- CLI-first: every workflow is available in the CLI; UI focuses on visibility and speed if built.
 - Fast, keyboard-driven workflow for managing projects and variants.
 - Keep main screen responsive; long tasks show in sidebar spinner.
 - Make state visible: variants, context packs, env status, merge plan.
@@ -21,6 +26,7 @@
 
 ## UX principles
 - Keyboard first, mouse optional.
+- CLI parity: never require a UI for core workflows.
 - Single source of truth: sidebar lists projects and variants.
 - Avoid modal lockups; show non-blocking progress.
 - Explicit state labels: RUNNING, READY, ERROR, BUILDING.
@@ -100,7 +106,14 @@
 
 ## Key flows
 
-### Add project (TUI)
+### Create project (UI, optional)
+1. Create Project -> choose source: new, from template, or create as project.
+2. If template or create-as: review prefilled choices and optionally edit.
+3. Select runtime (native/Docker), tool packs, and agent tool configs.
+4. Confirm and scaffold; project is registered automatically.
+5. Prompt to save as reusable template (default: no).
+
+### Add project (UI, optional)
 1. Add Project -> enter Git URL or local path.
 2. If URL, clone into managed projects root.
 3. Initialize workspace metadata.
@@ -146,12 +159,12 @@
 - Avoid color-only status signals; always use labels.
 
 ## VS Code/Cursor extension UX
-- Sidebar tree mirrors TUI projects/variants.
+- Sidebar tree mirrors projects/variants.
 - Actions: fork, open in devcontainer, view status.
 - Uses same daemon API; no duplicate state.
+- Consider this as the first UI surface if a standalone GUI/TUI is deferred.
 
 ## MVP scope
-- TUI-only with embedded PTY and sidebar status.
-- Project list, variant list, session view, env view.
-- Merge plan view is read-only first, apply later.
-- Memory view with candidate approval.
+- CLI provides full workflow coverage (init, fork, run, context, merge).
+- No UI required for MVP; UI decisions happen after CLI validation.
+- If a UI is built later, start with read-only status and session switching.
