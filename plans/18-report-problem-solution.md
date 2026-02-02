@@ -81,7 +81,7 @@ Key differentiators (especially relative to Sculptor/Conductor/Superconductor/Gr
 - Daemon is the source of truth for workspace state (projects, variants, runs, artifacts).
 - CLI is the primary client; UI clients are optional later and attach via the same daemon.
 - Variants are git worktrees with metadata.
-- Context packs and memory live in `.agentplane/` and are linked to runs.
+- Context packs and memory live in `.lazyagent/` and are linked to runs.
 - Capabilities are canonical and exported to tool-specific formats via plugins.
 - Merge planner produces patch bundles + merge plan + gate evidence.
 

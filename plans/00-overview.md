@@ -12,7 +12,7 @@ It standardizes workspaces, environments, capability sets, context packs, and me
 - Spec-first repository; primary output lives under `plans/`.
 - Python-first MVP with daemon + CLI core (Typer) and sidecar bridge; UI clients deferred.
 - Daemon is the primary source of truth; CLI is primary client; UI clients optional later.
-- Canonical env spec in `.agentplane/env/spec.json`; devcontainer configs generated.
+- Canonical env spec in `.lazyagent/env/spec.json`; devcontainer configs generated.
 - Memory uses Markdown with frontmatter; candidates require approval.
 - Port allocation at startup; dynamic remap via proxy is future work.
 - Project creation wizard (CLI-first) with project-local config and optional reusable templates.

@@ -29,7 +29,7 @@
 - What should the minimum viable template format include (runtime, tools, docs, env spec)?
 
 ## Open technical questions
-- Preferred workspace metadata location and naming (.agentplane/ vs other).
+- Preferred workspace metadata location and naming (.lazyagent/ vs other).
 - Long-term fact store format: JSONL, Markdown, or SQLite?
 - Merge bundle format: raw patches, commits, or both?
 - How to capture context budget consistently across providers.

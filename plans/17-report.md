@@ -15,8 +15,8 @@ LazyAgent is a local-first control plane for agent-driven development that makes
 - Merge planner: patch bundles + deterministic merge plans; optional agentic merge modes with guardrails.
 
 ### Storage model (restartable, local)
-- Global store: `~/.config/agentplane/` (projects registry, reusable skills/profiles/adapters).
-- Per-project store (git-ignored): `<repo>/.agentplane/` (workspace metadata, variants, env specs/journal, context packs, memory, run logs).
+- Global store: `~/.config/lazyagent/` (projects registry, reusable skills/profiles/adapters).
+- Per-project store (git-ignored): `<repo>/.lazyagent/` (workspace metadata, variants, env specs/journal, context packs, memory, run logs).
 - Generated tool configs (per variant worktree root): e.g. `opencode.json`, `.opencode/*`, `.cursor/*`.
 
 ### Integration strategy
@@ -69,7 +69,7 @@ LazyAgent is a local-first control plane for agent-driven development that makes
 
 ### Reliability
 - Restartable daemon: reconcile registry/projects/worktrees on startup; flag stale entries.
-- Durable local artifacts: runs/logs/context/memory stored in `.agentplane/` for post-mortem and audit.
+- Durable local artifacts: runs/logs/context/memory stored in `.lazyagent/` for post-mortem and audit.
 - Clear lifecycle states for variants and runs; explicit archive/remove flows.
 
 ### Security
@@ -104,15 +104,15 @@ LazyAgent is a local-first control plane for agent-driven development that makes
   - storage usage/retention warnings
 
 ### Logging
-- Per-run logs captured under `.agentplane/runs/<run-id>/` (stdout/stderr, summaries, artifacts).
+- Per-run logs captured under `.lazyagent/runs/<run-id>/` (stdout/stderr, summaries, artifacts).
 - Daemon logs stored locally with clear log levels and optional structured JSON.
 - Redaction rules applied before logs are persisted when configured.
 
 ### Backup and recovery
 - Primary recovery mechanism: git remains the canonical code history.
 - Backup scope for LazyAgent state:
-  - Global: `~/.config/agentplane/`
-  - Per project: `<repo>/.agentplane/` (git-ignored, but important for audit artifacts)
+  - Global: `~/.config/lazyagent/`
+  - Per project: `<repo>/.lazyagent/` (git-ignored, but important for audit artifacts)
 - Recovery flow: restore stores; daemon reconciles projects/worktrees/containers; stale entries flagged for repair/removal.
 
 

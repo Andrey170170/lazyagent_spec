@@ -7,7 +7,7 @@
 - Extensible: allow global defaults and per-project overrides.
 
 ## Global store
-Located at `~/.config/agentplane/`.
+Located at `~/.config/lazyagent/`.
 
 ### Contents
 - `registry.json`: list of registered projects, last opened, defaults.
@@ -18,7 +18,7 @@ Located at `~/.config/agentplane/`.
 - `templates/project/`: reusable project templates (saved from wizard).
 
 ## Per-project store
-Located at `<repo>/.agentplane/` and git-ignored by default.
+Located at `<repo>/.lazyagent/` and git-ignored by default.
 
 ### Contents
 - `workspace.json`: project metadata, default role/env, adapter settings.
@@ -38,10 +38,10 @@ Stored in the variant worktree root and regenerated as needed.
 - Cursor: `.cursor/rules/*` or `.cursorrules`
 
 ## Config resolution order
-1. Global defaults in `~/.config/agentplane/`.
-2. Project overrides in `.agentplane/`.
+1. Global defaults in `~/.config/lazyagent/`.
+2. Project overrides in `.lazyagent/`.
 3. Role profile (global or project).
-4. Variant overrides (metadata under `.agentplane/variants/`).
+4. Variant overrides (metadata under `.lazyagent/variants/`).
 5. Generated tool configs (derived artifacts).
 
 ## Restartability behavior
@@ -55,24 +55,24 @@ Stored in the variant worktree root and regenerated as needed.
 - During updates, tool sessions are paused or locked to avoid partial writes.
 
 ## Environment specs
-Located at `.agentplane/env/`.
+Located at `.lazyagent/env/`.
 
 - `spec.json`: canonical environment spec (base image + features + packages).
 - `journal.jsonl`: append-only log of runtime installs detected by sidecar.
 - `overlays/`: per-variant env overlays (optional).
 
 ## Memory store
-Located at `.agentplane/memory/`.
+Located at `.lazyagent/memory/`.
 
 - `decisions.md`: durable product/tech decisions.
 - `assumptions.md`: assumptions pending validation.
 - `invariants.md`: rules that should not be violated.
 - `candidates.md`: pending memory suggestions.
 
-## Example file: `.agentplane/workspace.json`
+## Example file: `.lazyagent/workspace.json`
 ```json
 {
-  "project_name": "agentplane",
+  "project_name": "lazyagent",
   "default_role": "backend-worker",
   "default_env": "devcontainer",
   "adapter": {

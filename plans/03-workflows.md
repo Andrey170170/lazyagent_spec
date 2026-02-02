@@ -18,7 +18,7 @@
 3. Choose language, package manager, project location, and runtime (native or Docker for MVP).
 4. Select tool packs (e.g., eza, fzf) and agent tools to install/configure.
 5. Scaffold repo structure, baseline docs, and initial configs.
-6. Write project-local blueprint and env spec under `.agentplane/`.
+6. Write project-local blueprint and env spec under `.lazyagent/`.
 7. Register project and summarize choices.
 8. Prompt to save as reusable template (default: no).
 

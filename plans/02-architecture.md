@@ -24,14 +24,14 @@
 ## Storage and configuration layout
 
 ### Global store (shared across projects)
-- `~/.config/agentplane/`
+- `~/.config/lazyagent/`
   - `registry.json`: registered projects, last open, defaults.
   - `skills/`: reusable skill packs (global).
   - `profiles/`: reusable role profiles (global).
   - `adapters/`: adapter templates or defaults.
 
 ### Per-project store (repo-local, git-ignored by default)
-- `<repo>/.agentplane/`
+- `<repo>/.lazyagent/`
   - `workspace.json`: project metadata, default role/env, adapter settings.
   - `skills/`: project-specific skill overrides.
   - `profiles/`: project-specific role profiles.
@@ -48,8 +48,8 @@
 - Fallback (Layer 1): `LAZYAGENT_*` env vars for any tool
 
 ## Config resolution order
-1. Global defaults (`~/.config/agentplane`).
-2. Project overrides (`.agentplane/`).
+1. Global defaults (`~/.config/lazyagent`).
+2. Project overrides (`.lazyagent/`).
 3. Role profile (global or project).
 4. Variant overrides (per-variant metadata).
 5. Generated tool configs (derived artifacts).

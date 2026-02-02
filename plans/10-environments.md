@@ -13,7 +13,7 @@
 
 ## Template store
 - Built-in templates (Python, Node, Rust, Go, ML/GPU).
-- Local templates stored under `~/.config/agentplane/templates/env/`.
+- Local templates stored under `~/.config/lazyagent/templates/env/`.
 - Remote templates from a registry (optional later).
 
 Template metadata fields (example):
@@ -26,7 +26,7 @@ Template metadata fields (example):
 - Generate env spec + devcontainer/Dockerfile from selections.
 
 ## Environment spec
-Canonical environment definition stored at `.agentplane/env/spec.json`.
+Canonical environment definition stored at `.lazyagent/env/spec.json`.
 
 Proposed fields:
 - `base_image`: image name + digest.
@@ -62,7 +62,7 @@ Variants can keep changes as overlays or promote to spec.
 
 Promotion rules:
 - Package installs go into `spec.json` lists.
-- Config file changes are copied into `.agentplane/env/overrides/` and added
+- Config file changes are copied into `.lazyagent/env/overrides/` and added
   as Dockerfile `COPY` steps in the generated image.
 - Unknown changes remain overlays with a warning.
 

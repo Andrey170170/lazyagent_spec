@@ -25,7 +25,7 @@ flowchart LR
   end
 
   subgraph Storage
-    Store[agentplane store]
+    Store[lazyagent store]
   end
 
   subgraph Git

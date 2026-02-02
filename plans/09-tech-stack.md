@@ -39,7 +39,7 @@ MVP is Python-first to maximize team speed and iteration. Rewrites to Go can hap
 - Use `subprocess` with structured capture and exit-code handling.
 
 ## Storage formats
-- Metadata: JSON/JSONL in `.agentplane/` and `~/.config/agentplane/`.
+- Metadata: JSON/JSONL in `.lazyagent/` and `~/.config/lazyagent/`.
 - Logs/artifacts: text and structured JSON summaries per run.
 - Context packs: JSON with provenance metadata.
 

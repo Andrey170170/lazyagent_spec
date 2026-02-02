@@ -12,12 +12,12 @@
 - Candidate memories: pending items awaiting approval.
 
 ## Storage layout
-- `.agentplane/memory/decisions.md`
-- `.agentplane/memory/assumptions.md`
-- `.agentplane/memory/invariants.md`
-- `.agentplane/memory/candidates.md`
-- `.agentplane/context/active.md`
-- `.agentplane/runs/<run-id>/summary.md`
+- `.lazyagent/memory/decisions.md`
+- `.lazyagent/memory/assumptions.md`
+- `.lazyagent/memory/invariants.md`
+- `.lazyagent/memory/candidates.md`
+- `.lazyagent/context/active.md`
+- `.lazyagent/runs/<run-id>/summary.md`
 
 ## Memory format (Markdown + frontmatter)
 Each entry uses frontmatter for structure and a short body for readability.
