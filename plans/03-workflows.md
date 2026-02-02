@@ -53,12 +53,12 @@
 
 ## Example CLI flow (placeholder names)
 ```
-lazyagent init
-lazyagent variant create feat-context-pack --base main --role backend-worker
-lazyagent run --variant feat-context-pack --role backend-worker --cmd "uv run pytest"
-lazyagent context inspect --run <run-id>
-lazyagent bundle create --variant feat-context-pack
-lazyagent merge plan --bundle <bundle-id>
+lazyagent project init
+lazyagent project fork create feat-context-pack --base main
+lazyagent project run uv run pytest
+lazyagent project context inspect --run <run-id>
+lazyagent project patch create
+lazyagent project merge plan --bundle <bundle-id>
 ```
 
 ## Context pack flow

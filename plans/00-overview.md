@@ -70,7 +70,7 @@ Provide a unified, local-first workspace layer that turns agentic coding into a 
 
 ### Layer 1: CLI-first Foundation (Core Platform)
 The base platform that everything builds on:
-- **CLI (primary)**: `lazyagent fork`, `run`, `merge`, `status`, etc.
+- **CLI (primary)**: `lazyagent project fork create`, `project run`, `project merge`, `list`, etc.
 - **UI clients (optional, later)**: simple GUI, TUI, or VS Code extension for dashboards/sessions
 - **Daemon**: Source of truth for workspace state
 - Works with ANY tool even without export plugins
@@ -114,3 +114,8 @@ As Layers 1-3 mature, patterns stabilize into standards:
 - plans/14-merging.md
 - plans/15-monetization.md
 - plans/16-integration-strategy.md
+- plans/17-report.md
+- plans/18-report-problem-solution.md
+- plans/19-feature-ideas.md
+- plans/20-variant-primitives.md
+- plans/21-non-git-rollback.md

@@ -27,17 +27,17 @@ See `plans/16-integration-strategy.md` for layer details.
 Focus: CLI-first foundation that works with ANY agent tool.
 
 Deliverables:
-- CLI commands: `lazyagent init`, `lazyagent fork`, `lazyagent list`.
+- CLI commands: `lazyagent project init`, `lazyagent project fork create`, `lazyagent project list`, `lazyagent list`.
 - CLI project creation wizard (new project + register) with project-local blueprint.
 - Variant manager wrapping git worktrees.
-- Native run executor: `lazyagent run <any-command>` with logs.
+- Native run executor: `lazyagent project run <any-command>` with logs.
 - Basic context snapshot on fork (tracked files, git state).
 - Patch bundle export (diff-based) and apply.
 - Daemon skeleton with project registry.
 
 Exit: can fork a variant, run ANY tool inside it, capture changes as patch.
 
-**Layer 1 validation**: User runs `lazyagent fork && opencode` (or cursor, or claude) and it just works.
+**Layer 1 validation**: User runs `lazyagent project fork create && opencode` (or cursor, or claude) and it just works.
 
 ## Phase 1: MVP user loop (Layer 1 complete + Layer 2 starts)
 Focus: complete CLI loop, begin config/skill export plugins.
@@ -127,6 +127,19 @@ Deliverables:
 - Telemetry hooks (local-only by default).
 
 Exit: production-ready local system.
+
+## Future directions (not scheduled, post-MVP)
+These are explicit "nice-to-have" directions. They are not committed to the
+roadmap unless the core CLI product proves strong demand and resources allow.
+
+- Codex-inspired Git surface in a UI: diff panel, stage/revert, commit, and
+  PR creation scoped to variants/worktrees with merge-gate awareness.
+- "Open in editor" launcher: per-project default editor, multi-editor menu, and
+  one-click open for a variant's worktree path.
+- Action buttons in UI: per-project run/test/lint/build shortcuts backed by
+  embedded terminal logs and run artifacts.
+- Review mode: single-pane inspection of uncommitted changes and patch bundles
+  before merge.
 
 ## Agent-assisted workflow (all phases)
 - Use coding agents for scaffolding, test generation, and docs sync.

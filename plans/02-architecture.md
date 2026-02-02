@@ -78,6 +78,8 @@
 - Map variant metadata to worktree path and branch.
 - Support detached or branch-backed worktrees.
 - Handle worktree cleanup with explicit remove and prune safety.
+- Future direction: allow a change-graph or patch-stack backend, with worktrees
+  as a materialization step rather than the source of truth.
 
 ## Environment strategy
 - Native: run commands in host environment (no container).
@@ -160,6 +162,11 @@ See `plans/16-integration-strategy.md` for full details.
 - Verification gates: lint/test/status before merge.
 - Optional 3-way conflict helper, but human-approved.
 - Supports intent-slice and pattern merge modes.
+
+## Non-git rollback (future)
+- Consider a snapshot store for ad-hoc tasks outside Git.
+- Store snapshots in the global store with explicit path allowlists.
+- Surface the same diff/restore UX as git-backed variants.
 
 ## APIs and surfaces
 - CLI commands: init, variant create, run, context inspect, merge plan.

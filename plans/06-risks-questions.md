@@ -33,6 +33,10 @@
 - Long-term fact store format: JSONL, Markdown, or SQLite?
 - Merge bundle format: raw patches, commits, or both?
 - How to capture context budget consistently across providers.
+- Whether to keep git worktrees long-term or evolve toward a change-stack or
+  change-graph variant primitive.
+- Whether a non-git snapshot/rollback layer should be a core feature or an
+  optional adapter for ad-hoc tasks.
 
 ## What's left to discuss
 - Daemon + sidecar API protocol (endpoints, auth, reconnects).

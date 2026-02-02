@@ -168,3 +168,40 @@ TUI, or a VS Code/Cursor extension.
 - CLI provides full workflow coverage (init, fork, run, context, merge).
 - No UI required for MVP; UI decisions happen after CLI validation.
 - If a UI is built later, start with read-only status and session switching.
+
+## Future directions (Codex-inspired UI/UX, not scheduled)
+These are optional, resource-heavy ideas to revisit after core CLI value is
+proven. They should not block MVP milestones.
+
+### Open in editor (multi-editor launcher)
+- Add a compact "Open in" control on the variant header and project overview.
+- Show a short menu of detected editors (VS Code, Cursor, JetBrains, Zed, etc.)
+  plus a fallback "System default".
+- Remember the last editor used per project in `.lazyagent/workspace.json`.
+- If a variant uses a worktree, always open that worktree path, not repo root.
+- Show a small "external" indicator to communicate that the UI is handing off
+  control to the editor.
+
+### Git surface (diff, stage, commit, PR)
+- Right-side diff panel with file list, status (modified, untracked, staged),
+  and inline comments for agent fixes.
+- Stage/revert chunk actions should map directly to the worktree, not the base
+  branch.
+- Commit form should be scoped to the current variant and respect merge gates
+  (if gates fail, show a clear block + link to logs).
+- "Create PR" action should export patch bundles + merge plan metadata and
+  open a lightweight PR form (or hand off to CLI/gh).
+- Treat diff/commit as a convenience layer on top of patch bundles, not a
+  separate workflow.
+
+### Action buttons (quick commands)
+- Allow per-project action buttons ("Run", "Test", "Lint", "Build") that
+  launch in the embedded terminal and stream logs to the UI.
+- Actions should be defined once in `.lazyagent/workspace.json` and run within
+  the active variant's environment.
+- Show status badges (running, success, failed) tied to run artifacts.
+
+### Codex-inspired polish
+- Command palette for fast navigation (projects, variants, actions).
+- Diff panel toggle and integrated terminal toggle on the main header.
+- Optional "review mode" that highlights uncommitted changes for inspection.

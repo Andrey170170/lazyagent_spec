@@ -31,6 +31,12 @@ This repository contains the product and technical specification for a local-fir
 - `plans/13-memory.md`
 - `plans/14-merging.md`
 - `plans/15-monetization.md`
+- `plans/16-integration-strategy.md`
+- `plans/17-report.md`
+- `plans/18-report-problem-solution.md`
+- `plans/19-feature-ideas.md`
+- `plans/20-variant-primitives.md`
+- `plans/21-non-git-rollback.md`
 
 ## Working notes
 - This repo is intentionally small; code will be added after the spec is validated.
