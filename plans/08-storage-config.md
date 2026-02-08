@@ -30,6 +30,8 @@ Located at `<repo>/.lazyagent/` and git-ignored by default.
 - `variants/`: per-variant metadata and status.
 - `context/`: context packs and fact store.
 - `runs/`: stdout/stderr logs, test reports, artifacts.
+- `ports.json`: logical port mappings per variant.
+- `sessions/`: agent session logs and metadata.
 
 ## Generated tool configs (per variant)
 Stored in the variant worktree root and regenerated as needed.
@@ -53,6 +55,12 @@ Stored in the variant worktree root and regenerated as needed.
 - Default: skills/configs are read-only inside containers (bind-mounted).
 - If enabled: sidecar requests updates via daemon; daemon applies edits on host.
 - During updates, tool sessions are paused or locked to avoid partial writes.
+
+## Config snapshots and apply journal (future)
+- `config_versions/`: immutable snapshots of canonical config state.
+- `config_apply.jsonl`: append-only log of apply attempts and outcomes.
+- Each change records apply scope: `hot`, `next_run`, or `restart_required`.
+- Keep last-known-good pointer for fast rollback.
 
 ## Environment specs
 Located at `.lazyagent/env/`.

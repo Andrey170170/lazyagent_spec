@@ -58,10 +58,12 @@
 - On startup, the daemon reads `registry.json` and reconciles projects.
 - Worktrees/containers are reattached when possible; stale entries are flagged.
 - Sidebar session state is restored from the last known run.
+- Future direction: add a hot-update manager for config changes with staged
+  activation and rollback.
 
 ## Tool memory injection
 - Adapters always point tools to the canonical memory files.
-- After memory promotion, prompt user to restart sessions.
+- After memory promotion, prompt restart unless adapter/tool supports live apply.
 
 ## Data model (minimal)
 - Workspace: name, root path, default role, default env, created_at.

@@ -201,7 +201,25 @@ proven. They should not block MVP milestones.
   the active variant's environment.
 - Show status badges (running, success, failed) tied to run artifacts.
 
+### Live update controls (hot config)
+- Show config update scope per change: hot, next-run, or restart-required.
+- Display current config version and last applied timestamp in project settings.
+- Provide one-click rollback to last known-good config snapshot.
+- Use non-blocking toasts for apply success/failure with links to apply logs.
+
 ### Codex-inspired polish
 - Command palette for fast navigation (projects, variants, actions).
 - Diff panel toggle and integrated terminal toggle on the main header.
 - Optional "review mode" that highlights uncommitted changes for inspection.
+
+### Kanban board view (parallel agents)
+- Alternate view that surfaces tasks as cards with status columns.
+- Cards link to variants/runs and expose quick open actions into the coding UI.
+- WIP limits and blocker badges to keep parallel work manageable.
+- Swimlanes by agent or by variant to show concurrency at a glance.
+
+### Companion observer view (mobile-first, read-only)
+- Optional companion web app with glanceable run status and step progress.
+- Notification-style summary card (for example, "indexing workspace 5/7").
+- Tap-through into a read-only terminal stream with scrollback and run summary.
+- Observer mode must never interrupt active runs; lifecycle stays daemon-owned.

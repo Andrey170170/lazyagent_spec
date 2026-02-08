@@ -156,3 +156,201 @@ Risks and open questions:
 - Avoid duplicating Git UIs that users already trust in their editor.
 - Decide how much Git functionality should live in CLI vs UI.
 - Ensure commits in a variant never bypass merge-plan verification gates.
+
+## 4) P2P collaboration mesh (serverless team sync)
+
+Sources:
+- https://raw.githubusercontent.com/automerge/automerge/main/README.md
+- https://raw.githubusercontent.com/automerge/automerge-repo/main/README.md
+- https://raw.githubusercontent.com/syncthing/syncthing/main/README.md
+- https://raw.githubusercontent.com/hypercore-protocol/hypercore/main/README.md
+- https://raw.githubusercontent.com/ipfs/kubo/master/README.md
+
+Notes:
+- Automerge provides CRDTs and sync protocols for local-first data.
+- Automerge Repo includes pluggable networking, including websocket adapters.
+- Syncthing demonstrates peer-to-peer file sync with safety and security goals.
+- Hypercore and IPFS highlight content-addressed, append-only or DAG-based
+  replication primitives.
+
+Opportunity and fit:
+- A P2P mesh supports small teams that want collaboration without a hosted
+  server or centralized trust.
+- It aligns with local-first workflows: each member has a complete copy and can
+  work offline, then sync changes when peers are available.
+
+Integration sketch:
+- Represent workspace metadata (variants, runs, task state) as CRDT documents.
+- Store patch bundles and artifacts as content-addressed blobs, replicated on
+  demand (sparse sync for large repos).
+- Provide a local "relay" mode for teams with NAT issues, but keep it optional.
+- Use per-workspace keys for encryption and signing of updates.
+- Add CLI flows for peer invites and trust onboarding (`lazyagent peer invite`).
+
+Risks and open questions:
+- NAT traversal and peer discovery are brittle without a relay.
+- Eventual consistency can confuse users without strong conflict UX.
+- Key management and revocation are hard in small teams.
+- Large binary artifacts could overwhelm peer devices.
+
+## 5) Hosted collaboration service (central server)
+
+Sources:
+- https://raw.githubusercontent.com/automerge/automerge-repo/main/README.md
+- https://raw.githubusercontent.com/supabase/supabase/master/README.md
+
+Notes:
+- Automerge Repo includes websocket network adapters for client/server sync.
+- Supabase demonstrates a hosted stack with Postgres, realtime subscriptions,
+  auth, and storage services.
+
+Opportunity and fit:
+- A hosted service offers reliable presence, fast sync, and simpler onboarding.
+- Central server can provide team-wide search, audit trails, and access control.
+
+Integration sketch:
+- Server stores workspace metadata, patch bundles, and run artifacts.
+- Use websocket or realtime channels for presence, lock hints, and fast updates.
+- Auth and org management (teams, roles, project access) live in the server.
+- Object storage for large artifacts; database for metadata and indexes.
+- Offline clients still work locally and sync when connected.
+
+Risks and open questions:
+- Hosting increases cost and complexity (SaaS surface area).
+- Requires robust security model, rate limiting, and tenancy isolation.
+- Must avoid coupling to a single cloud provider too early.
+
+## 6) Kanban agent board (parallel work view)
+
+Sources:
+- https://en.wikipedia.org/wiki/Kanban_%28development%29
+- https://www.atlassian.com/agile/kanban
+
+Notes:
+- A Kanban board emphasizes flow, WIP limits, and clear status transitions.
+- It is a complementary view to a coding-first interface, not a replacement.
+
+Opportunity and fit:
+- Parallel agents map naturally to a board: each card is a task with status.
+- Helps users coordinate multiple variants and avoid overloading agents.
+- Provides a high-level view for planning and prioritization.
+
+Integration sketch:
+- Board columns: Backlog, Ready, In Progress, Review, Done (configurable).
+- Cards represent tasks from Beads or a lightweight internal task model.
+- Each card can spawn a variant/run and links to its patch bundles.
+- WIP limits per column; show blockers and dependency links on cards.
+- "Open" actions jump into the coding view for the active task/variant.
+- Swimlanes by agent or by variant to show parallel execution.
+
+Risks and open questions:
+- Avoid duplicating existing task tools (Linear, Jira, Beads).
+- Need reliable status syncing between runs and cards.
+- Decide on the source of truth for tasks (Beads vs internal vs external).
+
+## 7) Observer companion app (read-only remote progress)
+
+Sources:
+- https://raw.githubusercontent.com/tsl0922/ttyd/main/README.md
+- https://raw.githubusercontent.com/yudai/gotty/master/README.md
+- https://raw.githubusercontent.com/xtermjs/xterm.js/master/README.md
+- https://developer.mozilla.org/en-US/docs/Web/API/Notifications_API
+- https://developer.mozilla.org/en-US/docs/Web/API/WebSocket
+- https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events
+
+Notes:
+- ttyd and GoTTY show that terminal output can be streamed to the web with a
+  read-only default and optional write mode.
+- xterm.js supports robust browser terminal rendering and has attach/serialize
+  addons that help with reconnect and playback UX.
+- Notifications API supports system-level notifications outside the active app.
+- WebSocket and SSE are practical transports for pushing near-real-time updates.
+
+Opportunity and fit:
+- Matches the "camera over the workplace" need: monitor agent progress from a
+  phone without disturbing execution.
+- Reduces anxiety on long runs by surfacing current step, step count, and
+  high-level status in a glanceable view.
+- Complements the coding UI and Kanban view with a passive observation surface.
+
+Integration sketch:
+- Add a daemon progress stream (`run_started`, `step_started`, `step_done`,
+  `log_chunk`, `run_failed`, `run_done`) with monotonic sequence IDs.
+- Expose a companion web app (PWA first) with a compact status card: current
+  task title, step progress (`5/7`), elapsed time, and health state.
+- Push notification updates on significant events (step complete, blocked,
+  failed, completed) with deep-link into full run view.
+- Full run view includes read-only terminal stream (scrollback), progress
+  summary, latest diff summary, and recent artifacts.
+- Keep observer channel strictly read-only by default; any interactive control
+  requires explicit elevation with short-lived tokens.
+
+Design details (non-interference):
+- Separate control plane and observer plane endpoints.
+- Observer plane only reads append-only run events and terminal output buffers.
+- Rate-limit observer polling/stream subscriptions to avoid impacting agent run.
+- If observer disconnects, run continues unchanged; no coupling to lifecycle.
+
+Risks and open questions:
+- Remote access security (auth, device trust, token rotation, revocation).
+- Mobile background limits can delay notifications or stream updates.
+- Step counts are uncertain for open-ended agent tasks; need robust fallback UX.
+- Deciding between local-only LAN mode, tunneled mode, or hosted relay.
+
+## 8) Live config updates (no restart when possible)
+
+Sources:
+- https://www.envoyproxy.io/docs/envoy/latest/intro/arch_overview/operations/dynamic_configuration
+- https://www.envoyproxy.io/docs/envoy/latest/intro/arch_overview/operations/runtime
+- https://www.envoyproxy.io/docs/envoy/latest/start/quick-start/configuration-dynamic-filesystem.html
+- https://nginx.org/en/docs/control.html
+- https://caddyserver.com/docs/api
+- https://context7.com/samuelcolvin/watchfiles
+- https://context7.com/open-feature/spec
+
+Notes:
+- Envoy demonstrates a strong no-restart model via xDS and runtime config.
+- Envoy dynamic filesystem docs emphasize atomic file replacement, not in-place
+  edits, to preserve consistency.
+- NGINX uses signal-based graceful config reload (`HUP`) as a proven daemon
+  pattern.
+- Caddy exposes an admin API for runtime config updates.
+- watchfiles supports fast file-watch loops and process reload workflows.
+- OpenFeature models runtime configuration change events via provider handlers.
+
+Opportunity and fit:
+- Reduces friction when a user tweaks skills, policies, or adapter config during
+  active work.
+- Keeps long-running sessions useful by applying safe changes immediately.
+- Provides a cleaner UX than "edit config then restart everything".
+
+Integration sketch:
+- Add a Config Update Manager in the daemon with file watchers + apply pipeline.
+- Introduce config classes with explicit apply semantics:
+  - `hot`: apply immediately to active components.
+  - `next_run`: apply only to newly started runs/sessions.
+  - `restart_required`: stage update and show restart action.
+- Maintain versioned config snapshots and an apply journal for rollback.
+- Validate updates before activation (schema, adapter capability checks,
+  permission rules).
+- Perform two-phase apply: stage -> activate -> health check -> commit.
+- Push `config_changed` events to UI/CLI with per-component status.
+
+Design details (safety + non-interference):
+- Use atomic writes and rename/swap semantics for generated files.
+- Coalesce rapid file changes (debounce window) to avoid reload storms.
+- Keep a capability matrix per adapter/tool so unsupported live updates
+  gracefully downgrade to `next_run` or `restart_required`.
+- Never interrupt active agent execution for `hot` updates unless policy says so.
+- If activation fails, auto-rollback to last known-good config and raise alert.
+
+Possible commands:
+- `lazyagent config apply --live`
+- `lazyagent config status`
+- `lazyagent config rollback <version>`
+
+Risks and open questions:
+- Users may assume all changes are live when some are only `next_run`.
+- Race conditions if tools read config while files are being regenerated.
+- Tool-specific limitations can make behavior inconsistent across adapters.
+- Need clear UX so "applied" always means "applied to what scope".

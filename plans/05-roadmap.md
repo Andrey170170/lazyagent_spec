@@ -140,6 +140,10 @@ roadmap unless the core CLI product proves strong demand and resources allow.
   embedded terminal logs and run artifacts.
 - Review mode: single-pane inspection of uncommitted changes and patch bundles
   before merge.
+- Companion observer app: mobile-first read-only monitoring with progress
+  notifications and live terminal output.
+- Live config control plane: capability-aware hot updates with rollback when
+  full restart is not required.
 
 ## Agent-assisted workflow (all phases)
 - Use coding agents for scaffolding, test generation, and docs sync.

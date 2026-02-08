@@ -37,6 +37,10 @@
   change-graph variant primitive.
 - Whether a non-git snapshot/rollback layer should be a core feature or an
   optional adapter for ad-hoc tasks.
+- How to implement a secure read-only observer channel (mobile/web) that cannot
+  interfere with active agent runs.
+- Which config classes are safe for live apply vs requiring next-run or
+  full restart, per adapter/tool.
 
 ## What's left to discuss
 - Daemon + sidecar API protocol (endpoints, auth, reconnects).
