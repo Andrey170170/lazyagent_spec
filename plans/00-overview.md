@@ -16,6 +16,7 @@ It standardizes workspaces, environments, capability sets, context packs, and me
 - Memory uses Markdown with frontmatter; candidates require approval.
 - Port allocation at startup; dynamic remap via proxy is future work.
 - Project creation wizard (CLI-first) with project-local config and optional reusable templates.
+- Design-freeze CLI surface: `agent` is primary launch UX; `session`/`run` are lifecycle primitives; `runtime` is advanced diagnostics/control.
 
 ## Problem statement (condensed)
 - Capability sprawl: each tool has its own config and skill folders.
@@ -70,7 +71,7 @@ Provide a unified, local-first workspace layer that turns agentic coding into a 
 
 ### Layer 1: CLI-first Foundation (Core Platform)
 The base platform that everything builds on:
-- **CLI (primary)**: `lazyagent project fork create`, `project run`, `project merge`, `list`, etc.
+- **CLI (primary)**: `lazyagent project create`, `variant create`, `agent start`, `run exec`, `project reconcile`, `runtime drift`, etc.
 - **UI clients (optional, later)**: simple GUI, TUI, or VS Code extension for dashboards/sessions
 - **Daemon**: Source of truth for workspace state
 - Works with ANY tool even without export plugins

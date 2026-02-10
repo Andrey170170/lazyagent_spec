@@ -27,17 +27,17 @@ See `plans/16-integration-strategy.md` for layer details.
 Focus: CLI-first foundation that works with ANY agent tool.
 
 Deliverables:
-- CLI commands: `lazyagent project init`, `lazyagent project fork create`, `lazyagent project list`, `lazyagent list`.
+- CLI commands: `lazyagent project create/init/list`, `lazyagent variant create/list`, `lazyagent agent start/status`, `lazyagent runtime status`.
 - CLI project creation wizard (new project + register) with project-local blueprint.
 - Variant manager wrapping git worktrees.
-- Native run executor: `lazyagent project run <any-command>` with logs.
+- Native run executor: `lazyagent run exec <any-command>` with logs.
 - Basic context snapshot on fork (tracked files, git state).
 - Patch bundle export (diff-based) and apply.
 - Daemon skeleton with project registry.
 
-Exit: can fork a variant, run ANY tool inside it, capture changes as patch.
+Exit: can create a variant, launch an agent session, run commands, and capture changes as patch.
 
-**Layer 1 validation**: User runs `lazyagent project fork create && opencode` (or cursor, or claude) and it just works.
+**Layer 1 validation**: User runs `lazyagent variant create ... && lazyagent agent start opencode` (or cursor, or claude) and it just works.
 
 ## Phase 1: MVP user loop (Layer 1 complete + Layer 2 starts)
 Focus: complete CLI loop, begin config/skill export plugins.
@@ -52,7 +52,7 @@ Deliverables:
 - Minimal memory store (facts/decisions files).
 - **Layer 2**: OpenCode export plugin (opencode.json, .opencode/*).
 
-Exit: a user can onboard a repo, fork, run an agent, and merge safely.
+Exit: a user can onboard a repo, create a variant, run an agent, and merge safely.
 
 **Layer 1 complete**: CLI core works with any tool; UI clients deferred.
 **Layer 2 begins**: OpenCode users get config/skill export.

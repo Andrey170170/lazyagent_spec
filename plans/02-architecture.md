@@ -7,6 +7,8 @@
 - Project manager: clones and registers repos in managed root.
 - Project scaffolder: drives creation wizard, project blueprints, and templates.
 - Variant manager: wraps git worktrees and branch lifecycle.
+- Runtime profile manager: resolves backend profiles (native/docker/future remote).
+- Agent launcher: primary intent-level agent start/attach surface.
 - Run executor: executes commands in isolated environments.
 - Session manager: handles tool sessions and PTY streams.
 - Context manager: builds and stores context packs and facts.
@@ -171,7 +173,7 @@ See `plans/16-integration-strategy.md` for full details.
 - Surface the same diff/restore UX as git-backed variants.
 
 ## APIs and surfaces
-- CLI commands: init, variant create, run, context inspect, merge plan.
+- CLI commands: project create/init/reconcile, variant create/merge, agent start/attach/status, run exec, runtime drift.
 - JSON outputs for integration with other tools.
 - UI consumes the same registry and run logs.
 - VS Code/Cursor extension uses RPC to open/attach to variants.

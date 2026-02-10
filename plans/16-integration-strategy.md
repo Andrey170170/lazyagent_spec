@@ -56,7 +56,7 @@ Hooking into tool internals, intercepting behavior, depending on undocumented AP
 **The core platform that everything builds on.**
 
 ### Components
-- **CLI (primary)**: `lazyagent project fork create`, `project run`, `project merge`, `list`, etc.
+- **CLI (primary)**: `lazyagent project create/reconcile`, `variant create`, `agent start`, `run exec`, `runtime drift`, etc.
 - **UI clients (optional, later)**: dashboard/sessions via GUI, TUI, or extension
 - **Daemon**: Source of truth for workspace state
 
@@ -71,11 +71,11 @@ Hooking into tool internals, intercepting behavior, depending on undocumented AP
 ### Tool-agnostic by default
 Even without any export plugins, users can:
 ```bash
-lazyagent project fork create feature-x
-cd $(lazyagent path feature-x)
+lazyagent variant create --name feature-x --base-branch main
+cd $(lazyagent variant path --variant feature-x)
 # Run ANY tool - it just works in the prepared environment
-opencode  # or cursor, or claude, or aider, or vim + copilot...
-lazyagent merge feature-x
+lazyagent agent start opencode --variant feature-x
+lazyagent variant merge --variant feature-x --into main
 ```
 
 ---
